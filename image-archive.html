@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Arcady - Froggy Images</title>
+  <link rel="icon" type="image/png" href="/download.png">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+ 
+ <!--Style For Website-->
+  <link rel="stylesheet" href="style.css">
+</head>
+  </head>
+  <!-- SOUND BOARD BUTTON (bottom left circle) -->
+<button id="soundboard-btn" class="floating-btn glass" title="Soundboard">
+  <i data-lucide="music"></i>
+</button>
+
+<!-- PANIC BUTTON (bottom right) -->
+<button id="panic-btn" class="floating-btn glass" title="PANIC">
+  <i data-lucide="alert-triangle"></i>
+</button>
+<body>
+ <!--Navigation Bar-->
+  <nav class="glass" id="nav-bar">
+    <a href="index.html" class="nav-logo">
+      <i data-lucide="sparkles"></i>
+      Arcady
+    </a>
+
+    <div class="nav-links">
+      <a href="index.html">
+        <i data-lucide="home"></i>
+        Home
+      </a>
+      <a href="games.html">
+        <i data-lucide="gamepad-2"></i>
+        Games
+      </a>
+      <a href="proxys.html">
+        <i data-lucide="layout-grid"></i>
+        Proxys
+      </a>
+      <a href="chatgpt.html">
+        <i data-lucide="brain"></i>
+        Ai
+      </a>
+      <a href="more.html">
+        <i data-lucide="circle-ellipsis"></i>
+        More
+      </a>
+      <button id="settings-btn">
+        <i data-lucide="settings"></i>
+      </button>
+    </div>
+  </nav>
+ <!--Settings Panel-->
+  <div id="settings-panel" class="glass">
+    <label for="bg-color">Background Color:</label>
+    <input type="color" id="bg-color" value="#87CEEB">
+
+    <label for="font-color">Font Color:</label>
+    <input type="color" id="font-color" value="#000000">
+
+    <label for="font-style">Font Style:</label>
+    <select id="font-style">
+      <option value="'Fredoka', sans-serif">Fredoka</option>
+      <option value="'Roboto', sans-serif">Roboto</option>
+      <option value="'Playfair Display', serif">Playfair Display</option>
+    </select>
+
+    <label for="bg-image">Background Image:</label>
+    <input type="file" id="bg-image" accept="image/*">
+
+    <button id="open-about-blank">Open in about:blank</button>
+
+    <label for="tab-title">Tab Cloak Title:</label>
+    <input type="text" id="tab-title" placeholder="e.g., Google Classroom">
+
+    <label for="tab-favicon">Tab Cloak Favicon URL:</label>
+    <input type="text" id="tab-favicon" placeholder="https://.../favicon.ico">
+    <button id="apply-cloak">Apply Tab Cloak</button>
+
+    <label>Font Glow:</label>
+    <input type="checkbox" id="font-glow">
+
+    <label for="nav-position">Nav Position:</label>
+    <select id="nav-position">
+      <option value="top-center">Top Center</option>
+      <option value="bottom-center">Bottom Center</option>
+      <option value="left">Left Side</option>
+      <option value="right">Right Side</option>
+    </select>
+
+    <button id="reset-settings">Reset All Settings</button>
+  </div>
+
+  <!--Main Content-->
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <div class="gallery">
+  <!--Boxes-->
+    <a href="download.png" class="card" target="_blank">
+      <img src="download.png" alt="">
+      <div class="title">Froggy</div>
+    </a>
+        <a href="features/Froggy distortion.png" class="card" target="_blank">
+      <img src="features/Froggy distortion.png" alt="">
+      <div class="title">Froggy Distortion</div>
+    </a>
+        <a href="features/gunpoint.png" class="card" target="_blank">
+      <img src="features/gunpoint.png" alt="">
+      <div class="title">Froggy Gun Pointed</div>
+    </a>
+        <a href="features/gamecontroller.png" class="card" target="_blank">
+      <img src="features/gamecontroller.png" alt="">
+      <div class="title">Froggy With A Game Controller</div>
+    </a>
+        <a href="https://example.com/1" class="card" target="_blank">
+      <img src="" alt="">
+      <div class="title">Untitled</div>
+    </a>
+        <a href="https://example.com/1" class="card" target="_blank">
+      <img src="" alt="">
+      <div class="title">Untitled</div>
+    </a>
+        <a href="https://example.com/1" class="card" target="_blank">
+      <img src="" alt="">
+      <div class="title">Untitled</div>
+    </a>
+        <a href="https://example.com/1" class="card" target="_blank">
+      <img src="" alt="">
+      <div class="title">Untitled</div>
+    </a>
+        <a href="https://example.com/1" class="card" target="_blank">
+      <img src="" alt="">
+      <div class="title">Untitled</div>
+    </a>
+        <a href="https://example.com/1" class="card" target="_blank">
+      <img src="" alt="">
+      <div class="title">Untitled</div>
+    </a>    <a href="https://example.com/1" class="card" target="_blank">
+      <img src="" alt="">
+      <div class="title">Untitled</div>
+    </a>
+        <a href="https://example.com/1" class="card" target="_blank">
+      <img src="" alt="">
+      <div class="title">Untitled</div>
+    </a>
+        <a href="https://example.com/1" class="card" target="_blank">
+      <img src="" alt="">
+      <div class="title">Untitled</div>
+    </a>
+        <a href="https://example.com/1" class="card" target="_blank">
+      <img src="" alt="">
+      <div class="title">Untitled</div>
+    </a>
+        <a href="https://example.com/1" class="card" target="_blank">
+      <img src="" alt="">
+      <div class="title">Untitled</div>
+    </a>
+        <a href="https://example.com/1" class="card" target="_blank">
+      <img src="" alt="">
+      <div class="title">Untitled</div>
+    </a>
+        <a href="https://example.com/1" class="card" target="_blank">
+      <img src="" alt="">
+      <div class="title">Untitled</div>
+    </a>
+        <a href="https://example.com/1" class="card" target="_blank">
+      <img src="" alt="">
+      <div class="title">Untitled</div>
+    </a>
+        <a href="https://example.com/1" class="card" target="_blank">
+      <img src="" alt="">
+      <div class="title">Untitled</div>
+    </a>
+        <a href="https://example.com/1" class="card" target="_blank">
+      <img src="" alt="">
+      <div class="title">Untitled</div>
+    </a>
+        <a href="https://example.com/1" class="card" target="_blank">
+      <img src="" alt="">
+      <div class="title">Untitled</div>
+    </a>
+  </div>
+
+</body>
+</html>
+
+ <!--Javascript Stuff-->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script>
+    lucide.createIcons();
+
+    const settingsBtn = document.getElementById('settings-btn');
+    const settingsPanel = document.getElementById('settings-panel');
+    const body = document.body;
+    const navBar = document.getElementById('nav-bar');
+
+    // Toggle settings
+    settingsBtn.addEventListener('click', () => {
+      settingsPanel.style.display = settingsPanel.style.display === 'flex' ? 'none' : 'flex';
+    });
+
+    // Load saved settings
+    window.addEventListener('load', () => {
+      if (localStorage.getItem('bgColor')) body.style.backgroundColor = localStorage.getItem('bgColor');
+      if (localStorage.getItem('fontColor')) body.style.color = localStorage.getItem('fontColor');
+      if (localStorage.getItem('fontStyle')) body.style.fontFamily = localStorage.getItem('fontStyle');
+      if (localStorage.getItem('bgImage')) {
+        body.style.backgroundImage = `url(${localStorage.getItem('bgImage')})`;
+        body.style.backgroundSize = 'cover';
+        body.style.backgroundPosition = 'center';
+      }
+      if (localStorage.getItem('fontGlow') === 'true') {
+        body.classList.add('font-glow');
+        document.getElementById('font-glow').checked = true;
+      }
+      if (localStorage.getItem('navPosition')) {
+        applyNavPosition(localStorage.getItem('navPosition'));
+        document.getElementById('nav-position').value = localStorage.getItem('navPosition');
+      }
+      if (localStorage.getItem('tabTitle')) document.title = localStorage.getItem('tabTitle');
+      if (localStorage.getItem('tabFavicon')) {
+        let link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+        link.rel = 'icon';
+        link.href = localStorage.getItem('tabFavicon');
+        document.head.appendChild(link);
+      }
+    });
+
+    // Background color
+    document.getElementById('bg-color').addEventListener('input', e => {
+      body.style.backgroundColor = e.target.value;
+      localStorage.setItem('bgColor', e.target.value);
+    });
+
+    // Font color
+    document.getElementById('font-color').addEventListener('input', e => {
+      body.style.color = e.target.value;
+      localStorage.setItem('fontColor', e.target.value);
+    });
+
+    // Font style
+    document.getElementById('font-style').addEventListener('change', e => {
+      body.style.fontFamily = e.target.value;
+      localStorage.setItem('fontStyle', e.target.value);
+    });
+
+    // Background image
+    document.getElementById('bg-image').addEventListener('change', e => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = ev => {
+          const url = ev.target.result;
+          body.style.backgroundImage = `url(${url})`;
+          body.style.backgroundSize = 'cover';
+          body.style.backgroundPosition = 'center';
+          localStorage.setItem('bgImage', url);
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // about:blank
+    document.getElementById('open-about-blank').addEventListener('click', () => {
+      const win = window.open('about:blank', '_blank');
+      const iframe = win.document.createElement('iframe');
+      iframe.src = location.href;
+      iframe.style.cssText = 'position:fixed;inset:0;border:none;width:100%;height:100%;';
+      win.document.body.appendChild(iframe);
+    });
+
+    // Tab cloak
+    document.getElementById('apply-cloak').addEventListener('click', () => {
+      const title = document.getElementById('tab-title').value.trim();
+      const favicon = document.getElementById('tab-favicon').value.trim();
+      if (title) {
+        document.title = title;
+        localStorage.setItem('tabTitle', title);
+      }
+      if (favicon) {
+        let link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+        link.rel = 'icon';
+        link.href = favicon;
+        document.head.appendChild(link);
+        localStorage.setItem('tabFavicon', favicon);
+      }
+    });
+
+    // Font glow
+    document.getElementById('font-glow').addEventListener('change', e => {
+      body.classList.toggle('font-glow', e.target.checked);
+      localStorage.setItem('fontGlow', e.target.checked);
+    });
+
+    // Nav position
+    document.getElementById('nav-position').addEventListener('change', e => {
+      const pos = e.target.value;
+      applyNavPosition(pos);
+      localStorage.setItem('navPosition', pos);
+    });
+
+    function applyNavPosition(pos) {
+      navBar.style.position = 'fixed';
+      navBar.style.transform = '';
+      navBar.style.flexDirection = 'row';
+      navBar.style.minWidth = '85vw';
+      navBar.style.width = 'auto';
+      navBar.style.height = 'auto';
+      navBar.style.minHeight = '';
+      navBar.style.borderRadius = '24px';
+
+      if (pos === 'top-center') {
+        navBar.style.top = '20px';
+        navBar.style.bottom = '';
+        navBar.style.left = '50%';
+        navBar.style.right = '';
+        navBar.style.transform = 'translateX(-50%)';
+      } else if (pos === 'bottom-center') {
+        navBar.style.top = '';
+        navBar.style.bottom = '20px';
+        navBar.style.left = '50%';
+        navBar.style.right = '';
+        navBar.style.transform = 'translateX(-50%)';
+      } else if (pos === 'left') {
+        navBar.style.top = '50%';
+        navBar.style.bottom = '';
+        navBar.style.left = '20px';
+        navBar.style.right = '';
+        navBar.style.transform = 'translateY(-50%)';
+        navBar.style.flexDirection = 'column';
+        navBar.style.minWidth = 'auto';
+        navBar.style.minHeight = '50vh';
+      } else if (pos === 'right') {
+        navBar.style.top = '50%';
+        navBar.style.bottom = '';
+        navBar.style.left = '';
+        navBar.style.right = '20px';
+        navBar.style.transform = 'translateY(-50%)';
+        navBar.style.flexDirection = 'column';
+        navBar.style.minWidth = 'auto';
+        navBar.style.minHeight = '50vh';
+      }
+    }
+
+    // Reset everything
+    document.getElementById('reset-settings').addEventListener('click', () => {
+      if (!confirm('Reset all settings to default?')) return;
+
+      localStorage.clear();
+
+      body.style.backgroundColor = '#87CEEB';
+      body.style.backgroundImage = '';
+      body.style.color = '#000000';
+      body.style.fontFamily = "'Fredoka', sans-serif";
+      body.classList.remove('font-glow');
+
+      document.getElementById('bg-color').value = '#87CEEB';
+      document.getElementById('font-color').value = '#000000';
+      document.getElementById('font-style').value = "'Fredoka', sans-serif";
+      document.getElementById('font-glow').checked = false;
+      document.getElementById('nav-position').value = 'top-center';
+      document.getElementById('tab-title').value = '';
+      document.getElementById('tab-favicon').value = '';
+
+      document.title = 'Arcady';
+      const link = document.querySelector("link[rel*='icon']");
+      if (link) link.remove();
+
+      applyNavPosition('top-center');
+      settingsPanel.style.display = 'none';
+    });
+  </script>
+</body>
+</html>
+<!-- … your existing content up to the gallery … -->
+
+  </div> <!-- end of .gallery -->
+
+  <!-- ──────────────────────────────────────────────── -->
+  <!--                MODAL / POPUP                     -->
+  <!-- ──────────────────────────────────────────────── -->
+  <div id="iframe-modal" class="modal glass" style="display: none;">
+    <div class="modal-content">
+      <button class="modal-close" title="Close">×</button>
+      
+      <div class="iframe-wrapper">
+        <iframe id="modal-iframe" src="about:blank" frameborder="0"></iframe>
+      </div>
+      
+      <div class="modal-controls">
+        <button id="btn-refresh">↻ Refresh</button>
+        <button id="btn-fullscreen">⛶ Full Screen</button>
+        <button id="btn-new-tab">↗ Open in new tab</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
+
+<!-- ──────────────────────────────────────────────── -->
+<!--                   JAVASCRIPT                     -->
+<!-- ──────────────────────────────────────────────── -->
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<script>
+// ── Existing lucide & settings code remains here ──
+lucide.createIcons();
+
+// … your existing settings / localStorage / tab cloak code …
+
+// ── NEW: Modal functionality ────────────────────────────────────────
+
+const modal          = document.getElementById('iframe-modal');
+const iframe         = document.getElementById('modal-iframe');
+const modalClose     = document.querySelector('.modal-close');
+const btnRefresh     = document.getElementById('btn-refresh');
+const btnFullscreen  = document.getElementById('btn-fullscreen');
+const btnNewTab      = document.getElementById('btn-new-tab');
+
+let currentUrl = '';
+
+// Close modal
+function closeModal() {
+  modal.style.display = 'none';
+  iframe.src = 'about:blank';     // clear iframe
+  document.body.style.overflow = ''; // restore scroll
+}
+
+modalClose.addEventListener('click', closeModal);
+
+// Close when clicking outside content area
+modal.addEventListener('click', e => {
+  if (e.target === modal) closeModal();
+});
+
+// Refresh
+btnRefresh.addEventListener('click', () => {
+  if (currentUrl) iframe.src = currentUrl;
+});
+
+// New tab
+btnNewTab.addEventListener('click', () => {
+  if (currentUrl) window.open(currentUrl, '_blank');
+  closeModal();
+});
+
+// Fullscreen (works best in modern browsers)
+btnFullscreen.addEventListener('click', () => {
+  if (!iframe) return;
+  
+  if (iframe.requestFullscreen) {
+    iframe.requestFullscreen();
+  } else if (iframe.webkitRequestFullscreen) { /* Safari */
+    iframe.webkitRequestFullscreen();
+  } else if (iframe.msRequestFullscreen) {     /* IE11 */
+    iframe.msRequestFullscreen();
+  }
+});
+
+// Intercept ALL card clicks
+document.querySelectorAll('.card').forEach(card => {
+  card.addEventListener('click', e => {
+    e.preventDefault();           // stop <a> navigation
+    
+    const url = card.getAttribute('href');
+    if (!url || url === '#' || url.startsWith('javascript:')) return;
+
+    currentUrl = url;
+    iframe.src = url;
+    
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden'; // prevent background scroll
+  });
+});
+// ────── FIXED SOUND BOARD + PANIC BUTTON (no scope errors) ──────
+const soundboardBtn = document.getElementById('soundboard-btn');
+const panicBtn      = document.getElementById('panic-btn');
+
+const SOUNDBOARD_URL = 'features/soundboard.html';
+
+soundboardBtn.addEventListener('click', () => {
+  const modal  = document.getElementById('iframe-modal');
+  const iframe = document.getElementById('modal-iframe');
+  
+  if (!modal || !iframe) {
+    alert("Modal not found! Make sure the iframe-modal HTML is still on the page.");
+    return;
+  }
+  
+  iframe.src = SOUNDBOARD_URL;
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+});
+
+panicBtn.addEventListener('click', () => {
+  if (confirm('🚨 PANIC BUTTON — Redirect now?')) {
+    window.location.href = 'https://launchpad.classlink.com/';
+  }
+});
+
+lucide.createIcons();
+</script>
+

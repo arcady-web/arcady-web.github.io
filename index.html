@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Arcady - 1.2.6</title>
+  <link rel="icon" type="image/png" href="/download.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!--Navigation Bar-->
+  <nav class="glass" id="nav-bar">
+    <a href="index.html" class="nav-logo">
+      <i data-lucide="sparkles"></i>
+      Arcady
+    </a>
+    <div class="nav-links">
+      <a href="index.html"><i data-lucide="home"></i> Home</a>
+      <a href="games.html"><i data-lucide="gamepad-2"></i> Games</a>
+      <a href="proxys.html"><i data-lucide="layout-grid"></i> Proxys</a>
+      <a href="chatgpt.html"><i data-lucide="brain"></i> Ai</a>
+      <a href="more.html"><i data-lucide="circle-ellipsis"></i> More</a>
+      <button id="settings-btn"><i data-lucide="settings"></i></button>
+    </div>
+  </nav>
+
+  <!--Settings Panel-->
+  <div id="settings-panel" class="glass">
+    <!-- (your settings panel content stays exactly the same) -->
+    <label for="bg-color">Background Color:</label>
+    <input type="color" id="bg-color" value="#87CEEB">
+    <label for="font-color">Font Color:</label>
+    <input type="color" id="font-color" value="#000000">
+    <label for="font-style">Font Style:</label>
+    <select id="font-style">
+      <option value="'Fredoka', sans-serif">Fredoka</option>
+      <option value="'Roboto', sans-serif">Roboto</option>
+      <option value="'Playfair Display', serif">Playfair Display</option>
+    </select>
+    <label for="bg-image">Background Image:</label>
+    <input type="file" id="bg-image" accept="image/*">
+    <button id="open-about-blank">Open in about:blank</button>
+    <label for="tab-title">Tab Cloak Title:</label>
+    <input type="text" id="tab-title" placeholder="e.g., Google Classroom">
+    <label for="tab-favicon">Tab Cloak Favicon URL:</label>
+    <input type="text" id="tab-favicon" placeholder="https://.../favicon.ico">
+    <button id="apply-cloak">Apply Tab Cloak</button>
+    <label>Font Glow:</label>
+    <input type="checkbox" id="font-glow">
+    <label for="nav-position">Nav Position:</label>
+    <select id="nav-position">
+      <option value="top-center">Top Center</option>
+      <option value="bottom-center">Bottom Center</option>
+      <option value="left">Left Side</option>
+      <option value="right">Right Side</option>
+    </select>
+    <button id="reset-settings">Reset All Settings</button>
+  </div>
+
+
+<!--boxes-->
+  <section class="glass" style="margin: 80px auto; max-width: 1380px; padding: 3.5rem 2.5rem; text-align: center;">
+    <h2 style="font-size: 3.1rem; margin-bottom: 1rem; text-shadow: 0 4px 15px rgba(0,0,0,0.3);">Arcady - VERSION 1.2.6</h2>
+    <p style="font-size: 1.35rem; opacity: 0.85; margin-bottom: 3rem;">Some random stuff</p>
+    
+    <div class="gallery">
+      <!-- Box 1 -->
+      <a href="chat.html" class="card">
+        <img src="features/arcady.jpg" alt="Chat picture isn't loading bruh">
+        <div class="title">Arcady Chat</div>
+      </a>
+
+  <a href="websites.html" class="card">
+    <i data-lucide="link" style="width:120px; height:120px; color:rgba(255,255,255,0.9); position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);"></i>
+    <div class="title">Websites</div>
+  </a>
+
+  <a href="movies.html" class="card">
+    <i data-lucide="tv-minimal-play" style="width:120px; height:120px; color:rgba(255,255,255,0.9); position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);"></i>
+    <div class="title">Movies</div>
+  </a>
+
+  <a href="arcady-gs.html" class="card">
+    <i data-lucide="gamepad" style="width:120px; height:120px; color:rgba(255,255,255,0.9); position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);"></i>
+    <div class="title">Arcadys Game Stash</div>
+  </a>
+
+      <a href="https://ooze34p.w3spaces.com/" target="_blank" class="card">
+        <img src="features/oozelogo.png" alt="oooooze picture isn't loading bruh">
+        <div class="title">Ooze Crib Reborn</div>
+      </a>
+
+  <a href="https://skribblefun.my.canva.site/" target="_blank" class="card">
+    <i data-lucide="star" style="width:120px; height:120px; color:rgba(255,255,255,0.9); position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);"></i>
+    <div class="title">Skribble</div>
+  </a>
+
+  <a href="vault.html" class="card">
+    <i data-lucide="vault" style="width:120px; height:120px; color:rgba(255,255,255,0.9); position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);"></i>
+    <div class="title">Arcady Vault</div>
+  </a>
+
+  <a href="image-archive.html" class="card">
+    <i data-lucide="package" style="width:120px; height:120px; color:rgba(255,255,255,0.9); position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);"></i>
+    <div class="title">Froggy Image Archive</div>
+  </a>
+    </div>
+  </section>
+
+ <!--Javascript Stuff-->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script>
+    lucide.createIcons();
+
+    const settingsBtn = document.getElementById('settings-btn');
+    const settingsPanel = document.getElementById('settings-panel');
+    const body = document.body;
+    const navBar = document.getElementById('nav-bar');
+
+    // Toggle settings
+    settingsBtn.addEventListener('click', () => {
+      settingsPanel.style.display = settingsPanel.style.display === 'flex' ? 'none' : 'flex';
+    });
+
+    // Load saved settings
+    window.addEventListener('load', () => {
+      if (localStorage.getItem('bgColor')) body.style.backgroundColor = localStorage.getItem('bgColor');
+      if (localStorage.getItem('fontColor')) body.style.color = localStorage.getItem('fontColor');
+      if (localStorage.getItem('fontStyle')) body.style.fontFamily = localStorage.getItem('fontStyle');
+      if (localStorage.getItem('bgImage')) {
+        body.style.backgroundImage = `url(${localStorage.getItem('bgImage')})`;
+        body.style.backgroundSize = 'cover';
+        body.style.backgroundPosition = 'center';
+      }
+      if (localStorage.getItem('fontGlow') === 'true') {
+        body.classList.add('font-glow');
+        document.getElementById('font-glow').checked = true;
+      }
+      if (localStorage.getItem('navPosition')) {
+        applyNavPosition(localStorage.getItem('navPosition'));
+        document.getElementById('nav-position').value = localStorage.getItem('navPosition');
+      }
+      if (localStorage.getItem('tabTitle')) document.title = localStorage.getItem('tabTitle');
+      if (localStorage.getItem('tabFavicon')) {
+        let link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+        link.rel = 'icon';
+        link.href = localStorage.getItem('tabFavicon');
+        document.head.appendChild(link);
+      }
+    });
+
+    // Background color
+    document.getElementById('bg-color').addEventListener('input', e => {
+      body.style.backgroundColor = e.target.value;
+      localStorage.setItem('bgColor', e.target.value);
+    });
+
+    // Font color
+    document.getElementById('font-color').addEventListener('input', e => {
+      body.style.color = e.target.value;
+      localStorage.setItem('fontColor', e.target.value);
+    });
+
+    // Font style
+    document.getElementById('font-style').addEventListener('change', e => {
+      body.style.fontFamily = e.target.value;
+      localStorage.setItem('fontStyle', e.target.value);
+    });
+
+    // Background image
+    document.getElementById('bg-image').addEventListener('change', e => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = ev => {
+          const url = ev.target.result;
+          body.style.backgroundImage = `url(${url})`;
+          body.style.backgroundSize = 'cover';
+          body.style.backgroundPosition = 'center';
+          localStorage.setItem('bgImage', url);
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // about:blank
+    document.getElementById('open-about-blank').addEventListener('click', () => {
+      const win = window.open('about:blank', '_blank');
+      const iframe = win.document.createElement('iframe');
+      iframe.src = location.href;
+      iframe.style.cssText = 'position:fixed;inset:0;border:none;width:100%;height:100%;';
+      win.document.body.appendChild(iframe);
+    });
+
+    // Tab cloak
+    document.getElementById('apply-cloak').addEventListener('click', () => {
+      const title = document.getElementById('tab-title').value.trim();
+      const favicon = document.getElementById('tab-favicon').value.trim();
+      if (title) {
+        document.title = title;
+        localStorage.setItem('tabTitle', title);
+      }
+      if (favicon) {
+        let link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+        link.rel = 'icon';
+        link.href = favicon;
+        document.head.appendChild(link);
+        localStorage.setItem('tabFavicon', favicon);
+      }
+    });
+
+    // Font glow
+    document.getElementById('font-glow').addEventListener('change', e => {
+      body.classList.toggle('font-glow', e.target.checked);
+      localStorage.setItem('fontGlow', e.target.checked);
+    });
+
+    // Nav position
+    document.getElementById('nav-position').addEventListener('change', e => {
+      const pos = e.target.value;
+      applyNavPosition(pos);
+      localStorage.setItem('navPosition', pos);
+    });
+
+    function applyNavPosition(pos) {
+      navBar.style.position = 'fixed';
+      navBar.style.transform = '';
+      navBar.style.flexDirection = 'row';
+      navBar.style.minWidth = '85vw';
+      navBar.style.width = 'auto';
+      navBar.style.height = 'auto';
+      navBar.style.minHeight = '';
+      navBar.style.borderRadius = '24px';
+
+      if (pos === 'top-center') {
+        navBar.style.top = '20px';
+        navBar.style.bottom = '';
+        navBar.style.left = '50%';
+        navBar.style.right = '';
+        navBar.style.transform = 'translateX(-50%)';
+      } else if (pos === 'bottom-center') {
+        navBar.style.top = '';
+        navBar.style.bottom = '20px';
+        navBar.style.left = '50%';
+        navBar.style.right = '';
+        navBar.style.transform = 'translateX(-50%)';
+      } else if (pos === 'left') {
+        navBar.style.top = '50%';
+        navBar.style.bottom = '';
+        navBar.style.left = '20px';
+        navBar.style.right = '';
+        navBar.style.transform = 'translateY(-50%)';
+        navBar.style.flexDirection = 'column';
+        navBar.style.minWidth = 'auto';
+        navBar.style.minHeight = '50vh';
+      } else if (pos === 'right') {
+        navBar.style.top = '50%';
+        navBar.style.bottom = '';
+        navBar.style.left = '';
+        navBar.style.right = '20px';
+        navBar.style.transform = 'translateY(-50%)';
+        navBar.style.flexDirection = 'column';
+        navBar.style.minWidth = 'auto';
+        navBar.style.minHeight = '50vh';
+      }
+    }
+
+    // Reset everything
+    document.getElementById('reset-settings').addEventListener('click', () => {
+      if (!confirm('Reset all settings to default?')) return;
+
+      localStorage.clear();
+
+      body.style.backgroundColor = '#87CEEB';
+      body.style.backgroundImage = '';
+      body.style.color = '#000000';
+      body.style.fontFamily = "'Fredoka', sans-serif";
+      body.classList.remove('font-glow');
+
+      document.getElementById('bg-color').value = '#87CEEB';
+      document.getElementById('font-color').value = '#000000';
+      document.getElementById('font-style').value = "'Fredoka', sans-serif";
+      document.getElementById('font-glow').checked = false;
+      document.getElementById('nav-position').value = 'top-center';
+      document.getElementById('tab-title').value = '';
+      document.getElementById('tab-favicon').value = '';
+
+      document.title = 'Arcady';
+      const link = document.querySelector("link[rel*='icon']");
+      if (link) link.remove();
+
+      applyNavPosition('top-center');
+      settingsPanel.style.display = 'none';
+    });
+  </script>
+  <script>
+// Random subtitle rotator (only bottom text changes)
+const subtitles = [
+  "Totally Not From The Creator Of Arcadium...",
+  "Broo this was made less than a week",
+  "Unfiltered internet since breakfast",
+  "We have proxies and bad decisions",
+  "Jeffry Epstein? Ive never heard of him",
+  "Not approved by any school district",
+  "Ladies calm down",
+  "oozeeeeeeeeee approved",
+  "Incognito mode is for cowards",
+  "Made with spite and glitter",
+  "If the FBI is watching, hi mom!",
+  "Loading your daily dose of questionable content...",
+  "Certified 100% vibe-based",
+  "Press F13 to summon the void",
+  "This is probably fine",
+  "Error 418: I'm Gay",
+  "Banned in 47 countries (rumored)",
+  "Your honor, my client was just vibing",
+  "404: Motivation not found",
+  "Running on hopes and expired dreams",
+  "Corny ahh shyt",
+  "Theres a 1% chance u see this",
+  "Class of 067",
+  "Brooooo",
+  "I do this instead of my homework",
+  "I NEED EMPLOYEES",
+  "Frogies Arcade?",
+  "Dude Typical Productions was never peak",
+  "Ooze drooze club",
+  "Omes Typical Site Vs Oooze Crib",
+  "riurgrwibfuwebfwefwef",
+  "She gon call me baby boo",
+  "Gooning since i was born (:",
+  "HOLY LAG",
+  "#cornballs",
+  "Brocadium",
+  "Oooze likes to eat drooze",
+  "Plz request things ill add them for sure",
+  "Hey make sure to check out everythiing we offer",
+  "Grown ass man btw",
+  "DUDE 90% ZOOM IS THE BEST PLEASE TRY IT",
+  "THEY BANNED FASTLYYY NOOOO",
+  "ima kms",
+  "Good game well played",
+];
+
+function changeSubtitle() {
+  const el = document.getElementById("splash-subtitle");
+  
+  el.classList.add("fade");
+
+  setTimeout(() => {
+    const randomIndex = Math.floor(Math.random() * subtitles.length);
+    el.textContent = subtitles[randomIndex];
+    
+    el.classList.remove("fade");
+  }, 1200); // time matches the CSS fade transition
+}
+
+setInterval(changeSubtitle, 5000);
+
+setTimeout(changeSubtitle, 5000);
+  </script>
+</body>
+</html>

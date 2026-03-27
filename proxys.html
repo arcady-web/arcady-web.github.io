@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Arcady - Proxys</title>
+  <link rel="icon" type="image/png" href="/download.png">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+ 
+<!-- External CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+  <!-- SOUND BOARD BUTTON (bottom left circle) -->
+<button id="soundboard-btn" class="floating-btn glass" title="Soundboard">
+  <i data-lucide="music"></i>
+</button>
+
+<!-- PANIC BUTTON (bottom right) -->
+<button id="panic-btn" class="floating-btn glass" title="PANIC">
+  <i data-lucide="alert-triangle"></i>
+</button>
+<body>
+ <!--Navigation Bar-->
+  <nav class="glass" id="nav-bar">
+    <a href="index.html" class="nav-logo">
+      <i data-lucide="sparkles"></i>
+      Arcady
+    </a>
+
+    <div class="nav-links">
+      <a href="index.html">
+        <i data-lucide="home"></i>
+        Home
+      </a>
+      <a href="games.html">
+        <i data-lucide="gamepad-2"></i>
+        Games
+      </a>
+      <a href="proxys.html">
+        <i data-lucide="layout-grid"></i>
+        Proxys
+      </a>
+      <a href="chatgpt.html">
+        <i data-lucide="brain"></i>
+        Ai
+      </a>
+      <a href="more.html">
+        <i data-lucide="circle-ellipsis"></i>
+        More
+      </a>
+      <button id="settings-btn">
+        <i data-lucide="settings"></i>
+      </button>
+    </div>
+  </nav>
+ <!--Settings Panel-->
+  <div id="settings-panel" class="glass">
+    <label for="bg-color">Background Color:</label>
+    <input type="color" id="bg-color" value="#87CEEB">
+
+    <label for="font-color">Font Color:</label>
+    <input type="color" id="font-color" value="#000000">
+
+    <label for="font-style">Font Style:</label>
+    <select id="font-style">
+      <option value="'Fredoka', sans-serif">Fredoka</option>
+      <option value="'Roboto', sans-serif">Roboto</option>
+      <option value="'Playfair Display', serif">Playfair Display</option>
+    </select>
+
+    <label for="bg-image">Background Image:</label>
+    <input type="file" id="bg-image" accept="image/*">
+
+    <button id="open-about-blank">Open in about:blank</button>
+
+    <label for="tab-title">Tab Cloak Title:</label>
+    <input type="text" id="tab-title" placeholder="e.g., Google Classroom">
+
+    <label for="tab-favicon">Tab Cloak Favicon URL:</label>
+    <input type="text" id="tab-favicon" placeholder="https://.../favicon.ico">
+    <button id="apply-cloak">Apply Tab Cloak</button>
+
+    <label>Font Glow:</label>
+    <input type="checkbox" id="font-glow">
+
+    <label for="nav-position">Nav Position:</label>
+    <select id="nav-position">
+      <option value="top-center">Top Center</option>
+      <option value="bottom-center">Bottom Center</option>
+      <option value="left">Left Side</option>
+      <option value="right">Right Side</option>
+    </select>
+
+    <button id="reset-settings">Reset All Settings</button>
+  </div>
+
+  <!--Main Content-->
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <section class="title-bar glass" style="margin-top: 20px; max-width: 900px; padding: 1.5rem 2rem; border-radius: 24px; animation: breathe 8s ease-in-out infinite; display: flex; align-items: center; justify-content: center; gap: 2rem; text-align: left;">
+  <img src="https://i.pinimg.com/1200x/3f/f9/8b/3ff98b503436b3c69b15e6051c8b1fa8.jpg" alt="Arcady Logo" style="width: 120px; height: auto; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+  <div style="flex: 1;">
+    <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">Proxys</h1>
+    <p id="splash-subtitle" style="font-size: 1.2rem;">Ik ur here to watch anime sites lol</p>
+  </div>
+</section>
+  <div class="gallery">
+  <!--Boxes-->
+    <a href="https://ixl-learning.thedaedals.com/" class="card" target="_blank">
+      <img src="data:image/png;base64,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" alt="">
+      <div class="title">Truffled</div>
+    </a>
+    <a href="https://vcsa-yt.blogspot.com.esdata.info/" class="card" target="_blank">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAZlBMVEUAAAD////X19eUlJR+fn7Dw8O6uro4ODinp6e/v7/MzMyzs7PPz8+2traZmZldXV2tra3u7u6fn59ubm5VVVXd3d1nZ2cbGxsqKipJSUmOjo4yMjJ2dnbn5+dQUFAmJiZAQEAUFBTFtveBAAAC+0lEQVR4nO3c6XLaMBSGYStpaSALhbIEuqS5/5tsOiEGy5KP5GFaf2fe91czHil+BhDemqYhIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiumZfUn1vtx6f3jourzztv+whJPtx2jw//fy1ctp5etrjtXe/oJv0rnyK97SS+Dk97e3V99+uVFhJVBTWESWF4a5iWk1hDVFUGO6Lp9URRntaTJQVFi83usJSorCwcLlRFpa9itLCouVGW1hCFBcWENWFNlFeGNbGtPrCMBue1oHQIHoQDhNdCAeJPoRDRCfCgWNUL8L896KOcD0szBJ1hLntbY/paYWEz4YwQxQSNsufBvEpNa2SMHtroy31WdQSjiGKCUcQ1YTmitojygl/GcIeUU7YLLcGMVpR9YRNszCI3e9FRWEdUVJYRdQUvhjCS6KmsPm2Mojn80VRYfNqffW3Z/2qQvvo5oOoKzSXmxNRSfg7GlD2KgoJZ2HRHbA3hO9EHeH9278fXjojltaK+veeho7wfU93RWPaZnrCsCka1DbPPZs4XeE2GmWtqDeZizvTFYaHaJj1Wcw0QWH7botW1J0b4XnFWHWXm731RtUT9lbUMcSJC1f77lDjro2gMP4sjngVpy7sEatX1MkLw6L7Rt3VEqcvjFfU18rPooCwt6LWESWEq2iCzBGosLC33FiH4XrC+Bh1408Ytt2TqYN1YUNPGEL03+yKlxsdYXzvvnS50RH2HoYqJAoLG+uJDX2heZdYXti8lHwvSgvtq+H6wgKiutA+gJMXmo/5yQvNx/z0hda1Gw/CYaIL4SDRh3BoRXUiPLgXNpvsq+hFmD8l9iPMLTeOhBmiJ+E+ecHfkzD9mJ8rYfIxP1/C1PmiN2Gf6E7Ym92fMH7Mz58wPiV2KIy++l0KO0SfwkuiU+HFPQ2vwvM9jf8hNP665yy9ufKvdL4uxo27SsvHWaL1x6Pdh+Tmu+faX3M7chwRERERERERERERERERERERERERERERERERERGN6w8EZi8TE/bc5AAAAABJRU5ErkJggg==" alt="">
+      <div class="title">Interstellar</div>
+
+    <a href="https://vcsa.capemaycityschool.org/#home" class="card" target="_blank">
+      <img src="https://vcsa.capemaycityschool.org/images/icons/logo.webp" alt="">
+      <div class="title">UniUB</div>
+    </a>
+
+        <a href="https://vocabulary.art.seminar.math.geography.rdddo.ru/" class="card" target="_blank">
+      <img src="data:image/png;base64,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" alt="">
+      <div class="title">Overcloaked</div>
+    </a>
+
+        <a href="https://instructure.storage.googleapis.com/index.html" class="card" target="_blank">
+      <img src="data:image/jpeg;base64,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" alt="">
+      <div class="title">DogeUB</div>
+    </a>
+  </div>
+</body>
+</html>
+
+ <!--Javascript Stuff-->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script>
+    lucide.createIcons();
+
+    const settingsBtn = document.getElementById('settings-btn');
+    const settingsPanel = document.getElementById('settings-panel');
+    const body = document.body;
+    const navBar = document.getElementById('nav-bar');
+
+    // Toggle settings
+    settingsBtn.addEventListener('click', () => {
+      settingsPanel.style.display = settingsPanel.style.display === 'flex' ? 'none' : 'flex';
+    });
+
+    // Load saved settings
+    window.addEventListener('load', () => {
+      if (localStorage.getItem('bgColor')) body.style.backgroundColor = localStorage.getItem('bgColor');
+      if (localStorage.getItem('fontColor')) body.style.color = localStorage.getItem('fontColor');
+      if (localStorage.getItem('fontStyle')) body.style.fontFamily = localStorage.getItem('fontStyle');
+      if (localStorage.getItem('bgImage')) {
+        body.style.backgroundImage = `url(${localStorage.getItem('bgImage')})`;
+        body.style.backgroundSize = 'cover';
+        body.style.backgroundPosition = 'center';
+      }
+      if (localStorage.getItem('fontGlow') === 'true') {
+        body.classList.add('font-glow');
+        document.getElementById('font-glow').checked = true;
+      }
+      if (localStorage.getItem('navPosition')) {
+        applyNavPosition(localStorage.getItem('navPosition'));
+        document.getElementById('nav-position').value = localStorage.getItem('navPosition');
+      }
+      if (localStorage.getItem('tabTitle')) document.title = localStorage.getItem('tabTitle');
+      if (localStorage.getItem('tabFavicon')) {
+        let link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+        link.rel = 'icon';
+        link.href = localStorage.getItem('tabFavicon');
+        document.head.appendChild(link);
+      }
+    });
+
+    // Background color
+    document.getElementById('bg-color').addEventListener('input', e => {
+      body.style.backgroundColor = e.target.value;
+      localStorage.setItem('bgColor', e.target.value);
+    });
+
+    // Font color
+    document.getElementById('font-color').addEventListener('input', e => {
+      body.style.color = e.target.value;
+      localStorage.setItem('fontColor', e.target.value);
+    });
+
+    // Font style
+    document.getElementById('font-style').addEventListener('change', e => {
+      body.style.fontFamily = e.target.value;
+      localStorage.setItem('fontStyle', e.target.value);
+    });
+
+    // Background image
+    document.getElementById('bg-image').addEventListener('change', e => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = ev => {
+          const url = ev.target.result;
+          body.style.backgroundImage = `url(${url})`;
+          body.style.backgroundSize = 'cover';
+          body.style.backgroundPosition = 'center';
+          localStorage.setItem('bgImage', url);
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // about:blank
+    document.getElementById('open-about-blank').addEventListener('click', () => {
+      const win = window.open('about:blank', '_blank');
+      const iframe = win.document.createElement('iframe');
+      iframe.src = location.href;
+      iframe.style.cssText = 'position:fixed;inset:0;border:none;width:100%;height:100%;';
+      win.document.body.appendChild(iframe);
+    });
+
+    // Tab cloak
+    document.getElementById('apply-cloak').addEventListener('click', () => {
+      const title = document.getElementById('tab-title').value.trim();
+      const favicon = document.getElementById('tab-favicon').value.trim();
+      if (title) {
+        document.title = title;
+        localStorage.setItem('tabTitle', title);
+      }
+      if (favicon) {
+        let link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+        link.rel = 'icon';
+        link.href = favicon;
+        document.head.appendChild(link);
+        localStorage.setItem('tabFavicon', favicon);
+      }
+    });
+
+    // Font glow
+    document.getElementById('font-glow').addEventListener('change', e => {
+      body.classList.toggle('font-glow', e.target.checked);
+      localStorage.setItem('fontGlow', e.target.checked);
+    });
+
+    // Nav position
+    document.getElementById('nav-position').addEventListener('change', e => {
+      const pos = e.target.value;
+      applyNavPosition(pos);
+      localStorage.setItem('navPosition', pos);
+    });
+
+    function applyNavPosition(pos) {
+      navBar.style.position = 'fixed';
+      navBar.style.transform = '';
+      navBar.style.flexDirection = 'row';
+      navBar.style.minWidth = '85vw';
+      navBar.style.width = 'auto';
+      navBar.style.height = 'auto';
+      navBar.style.minHeight = '';
+      navBar.style.borderRadius = '24px';
+
+      if (pos === 'top-center') {
+        navBar.style.top = '20px';
+        navBar.style.bottom = '';
+        navBar.style.left = '50%';
+        navBar.style.right = '';
+        navBar.style.transform = 'translateX(-50%)';
+      } else if (pos === 'bottom-center') {
+        navBar.style.top = '';
+        navBar.style.bottom = '20px';
+        navBar.style.left = '50%';
+        navBar.style.right = '';
+        navBar.style.transform = 'translateX(-50%)';
+      } else if (pos === 'left') {
+        navBar.style.top = '50%';
+        navBar.style.bottom = '';
+        navBar.style.left = '20px';
+        navBar.style.right = '';
+        navBar.style.transform = 'translateY(-50%)';
+        navBar.style.flexDirection = 'column';
+        navBar.style.minWidth = 'auto';
+        navBar.style.minHeight = '50vh';
+      } else if (pos === 'right') {
+        navBar.style.top = '50%';
+        navBar.style.bottom = '';
+        navBar.style.left = '';
+        navBar.style.right = '20px';
+        navBar.style.transform = 'translateY(-50%)';
+        navBar.style.flexDirection = 'column';
+        navBar.style.minWidth = 'auto';
+        navBar.style.minHeight = '50vh';
+      }
+    }
+
+    // Reset everything
+    document.getElementById('reset-settings').addEventListener('click', () => {
+      if (!confirm('Reset all settings to default?')) return;
+
+      localStorage.clear();
+
+      body.style.backgroundColor = '#87CEEB';
+      body.style.backgroundImage = '';
+      body.style.color = '#000000';
+      body.style.fontFamily = "'Fredoka', sans-serif";
+      body.classList.remove('font-glow');
+
+      document.getElementById('bg-color').value = '#87CEEB';
+      document.getElementById('font-color').value = '#000000';
+      document.getElementById('font-style').value = "'Fredoka', sans-serif";
+      document.getElementById('font-glow').checked = false;
+      document.getElementById('nav-position').value = 'top-center';
+      document.getElementById('tab-title').value = '';
+      document.getElementById('tab-favicon').value = '';
+
+      document.title = 'Arcady';
+      const link = document.querySelector("link[rel*='icon']");
+      if (link) link.remove();
+
+      applyNavPosition('top-center');
+      settingsPanel.style.display = 'none';
+    });
+  </script>
+</body>
+</html>
+<!-- … your existing content up to the gallery … -->
+
+  </div> <!-- end of .gallery -->
+
+  <!-- ──────────────────────────────────────────────── -->
+  <!--                MODAL / POPUP                     -->
+  <!-- ──────────────────────────────────────────────── -->
+  <div id="iframe-modal" class="modal glass" style="display: none;">
+    <div class="modal-content">
+      <button class="modal-close" title="Close">×</button>
+      
+      <div class="iframe-wrapper">
+        <iframe id="modal-iframe" src="about:blank" frameborder="0"></iframe>
+      </div>
+      
+      <div class="modal-controls">
+        <button id="btn-refresh">↻ Refresh</button>
+        <button id="btn-fullscreen">⛶ Full Screen</button>
+        <button id="btn-new-tab">↗ Open in new tab</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
+
+<!-- ──────────────────────────────────────────────── -->
+<!--                   JAVASCRIPT                     -->
+<!-- ──────────────────────────────────────────────── -->
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<script>
+// ── Existing lucide & settings code remains here ──
+lucide.createIcons();
+
+// … your existing settings / localStorage / tab cloak code …
+
+// ── NEW: Modal functionality ────────────────────────────────────────
+
+const modal          = document.getElementById('iframe-modal');
+const iframe         = document.getElementById('modal-iframe');
+const modalClose     = document.querySelector('.modal-close');
+const btnRefresh     = document.getElementById('btn-refresh');
+const btnFullscreen  = document.getElementById('btn-fullscreen');
+const btnNewTab      = document.getElementById('btn-new-tab');
+
+let currentUrl = '';
+
+// Close modal
+function closeModal() {
+  modal.style.display = 'none';
+  iframe.src = 'about:blank';     // clear iframe
+  document.body.style.overflow = ''; // restore scroll
+}
+
+modalClose.addEventListener('click', closeModal);
+
+// Close when clicking outside content area
+modal.addEventListener('click', e => {
+  if (e.target === modal) closeModal();
+});
+
+// Refresh
+btnRefresh.addEventListener('click', () => {
+  if (currentUrl) iframe.src = currentUrl;
+});
+
+// New tab
+btnNewTab.addEventListener('click', () => {
+  if (currentUrl) window.open(currentUrl, '_blank');
+  closeModal();
+});
+
+// Fullscreen (works best in modern browsers)
+btnFullscreen.addEventListener('click', () => {
+  if (!iframe) return;
+  
+  if (iframe.requestFullscreen) {
+    iframe.requestFullscreen();
+  } else if (iframe.webkitRequestFullscreen) { /* Safari */
+    iframe.webkitRequestFullscreen();
+  } else if (iframe.msRequestFullscreen) {     /* IE11 */
+    iframe.msRequestFullscreen();
+  }
+});
+
+// Intercept ALL card clicks
+document.querySelectorAll('.card').forEach(card => {
+  card.addEventListener('click', e => {
+    e.preventDefault();           // stop <a> navigation
+    
+    const url = card.getAttribute('href');
+    if (!url || url === '#' || url.startsWith('javascript:')) return;
+
+    currentUrl = url;
+    iframe.src = url;
+    
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden'; // prevent background scroll
+  });
+});
+
+</script>
+  <script>
+// Random subtitle rotator (only bottom text changes)
+const subtitles = [
+  "Totally Not From The Creator Of Arcadium...",
+  "Broo this was made less than a week",
+  "Unfiltered internet since breakfast",
+  "We have proxies and bad decisions",
+  "Jeffry Epstein? Ive never heard of him",
+  "Not approved by any school district",
+  "Ladies calm down",
+  "oozeeeeeeeeee approved",
+  "Incognito mode is for cowards",
+  "Made with spite and glitter",
+  "If the FBI is watching, hi mom!",
+  "Loading your daily dose of questionable content...",
+  "Certified 100% vibe-based",
+  "Press F13 to summon the void",
+  "This is probably fine",
+  "Error 418: I'm Gay",
+  "Banned in 47 countries (rumored)",
+  "Your honor, my client was just vibing",
+  "404: Motivation not found",
+  "Running on hopes and expired dreams",
+  "Corny ahh shyt",
+  "Theres a 1% chance u see this",
+  "Class of 067",
+  "Brooooo",
+  "I do this instead of my homework",
+  "I NEED EMPLOYEES",
+  "Frogies Arcade?",
+  "Dude Typical Productions was never peak",
+  "Ooze drooze club",
+  "Omes Typical Site Vs Oooze Crib",
+  "riurgrwibfuwebfwefwef",
+  "She gon call me baby boo",
+  "Gooning since i was born (:",
+  "HOLY LAG",
+  "#cornballs",
+  "Brocadium",
+  "Oooze likes to eat drooze",
+  "Plz request things ill add them for sure",
+  "Hey make sure to check out everythiing we offer",
+  "Grown ass man btw",
+  "DUDE 90% ZOOM IS THE BEST PLEASE TRY IT",
+  "THEY BANNED FASTLYYY NOOOO",
+  "ima kms",
+  "Good game well played",
+];
+
+function changeSubtitle() {
+  const el = document.getElementById("splash-subtitle");
+  
+  el.classList.add("fade");
+
+  setTimeout(() => {
+    const randomIndex = Math.floor(Math.random() * subtitles.length);
+    el.textContent = subtitles[randomIndex];
+    
+    el.classList.remove("fade");
+  }, 1200); // time matches the CSS fade transition
+}
+
+setInterval(changeSubtitle, 5000);
+
+setTimeout(changeSubtitle, 5000);
+    // ────── SOUND BOARD + PANIC BUTTON ──────
+const soundboardBtn = document.getElementById('soundboard-btn');
+const panicBtn       = document.getElementById('panic-btn');
+
+// ←←← CHANGE THIS TO YOUR SOUND BOARD URL
+const SOUNDBOARD_URL = 'features/Soundboard.html';
+
+soundboardBtn.addEventListener('click', () => {
+  currentUrl = SOUNDBOARD_URL;
+  iframe.src = currentUrl;
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+});
+
+panicBtn.addEventListener('click', () => {
+  if (confirm('🚨 PANIC BUTTON — Redirect now?')) {
+    window.location.href = 'https://launchpad.classlink.com/login'; // ←←← change if you want
+  }
+});
+
+// refresh lucide icons for the new buttons
+lucide.createIcons();
+  </script>

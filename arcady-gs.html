@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Arcady - Game Stash</title>
+  <link rel="icon" type="image/png" href="/download.png">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+ 
+ <!--Style For Website-->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+ <!--Navigation Bar-->
+  <nav class="glass" id="nav-bar">
+    <a href="index.html" class="nav-logo">
+      <i data-lucide="sparkles"></i>
+      Arcady
+    </a>
+
+    <div class="nav-links">
+      <a href="index.html">
+        <i data-lucide="home"></i>
+        Home
+      </a>
+      <a href="games.html">
+        <i data-lucide="gamepad-2"></i>
+        Games
+      </a>
+      <a href="proxys.html">
+        <i data-lucide="layout-grid"></i>
+        Proxys
+      </a>
+      <a href="chatgpt.html">
+        <i data-lucide="brain"></i>
+        Ai
+      </a>
+      <a href="more.html">
+        <i data-lucide="circle-ellipsis"></i>
+        More
+      </a>
+      <button id="settings-btn">
+        <i data-lucide="settings"></i>
+      </button>
+    </div>
+  </nav>
+ <!--Settings Panel-->
+  <div id="settings-panel" class="glass">
+    <label for="bg-color">Background Color:</label>
+    <input type="color" id="bg-color" value="#87CEEB">
+
+    <label for="font-color">Font Color:</label>
+    <input type="color" id="font-color" value="#000000">
+
+    <label for="font-style">Font Style:</label>
+    <select id="font-style">
+      <option value="'Fredoka', sans-serif">Fredoka</option>
+      <option value="'Roboto', sans-serif">Roboto</option>
+      <option value="'Playfair Display', serif">Playfair Display</option>
+    </select>
+
+    <label for="bg-image">Background Image:</label>
+    <input type="file" id="bg-image" accept="image/*">
+
+    <button id="open-about-blank">Open in about:blank</button>
+
+    <label for="tab-title">Tab Cloak Title:</label>
+    <input type="text" id="tab-title" placeholder="e.g., Google Classroom">
+
+    <label for="tab-favicon">Tab Cloak Favicon URL:</label>
+    <input type="text" id="tab-favicon" placeholder="https://.../favicon.ico">
+    <button id="apply-cloak">Apply Tab Cloak</button>
+
+    <label>Font Glow:</label>
+    <input type="checkbox" id="font-glow">
+
+    <label for="nav-position">Nav Position:</label>
+    <select id="nav-position">
+      <option value="top-center">Top Center</option>
+      <option value="bottom-center">Bottom Center</option>
+      <option value="left">Left Side</option>
+      <option value="right">Right Side</option>
+    </select>
+
+    <button id="reset-settings">Reset All Settings</button>
+  </div>
+
+  <!--Main Content-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Full-page iframe + bottom glass bar</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      font-family: system-ui, -apple-system, sans-serif;
+      color: white;
+    }
+
+    iframe {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      z-index: 1;
+    }
+
+    .glass-bar {
+      /* Liquid glass / neumorphic glassmorphism */
+      position: fixed;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 20px;
+
+      padding: 12px 24px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+
+      width: auto;
+      max-width: 94vw;
+    }
+
+    .glass-bar button {
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.20);
+      border-radius: 12px;
+      padding: 10px 18px;
+      color: white;
+      font-size: 0.98rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .glass-bar button:hover {
+      background: rgba(255,255,255,0.18);
+      transform: translateY(-1px);
+    }
+
+    .glass-bar button:active {
+      transform: translateY(0);
+    }
+
+    @media (max-width: 480px) {
+      .glass-bar {
+        bottom: 12px;
+        padding: 10px 16px;
+        gap: 12px;
+        border-radius: 16px;
+      }
+      .glass-bar button {
+        padding: 8px 14px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<!--iframe-->
+<iframe id="myframe" 
+        src="features/arcadygamestash.html"
+        allowfullscreen
+        allow="fullscreen">
+</iframe>
+
+<div class="glass-bar">
+  <button onclick="document.getElementById('myframe').contentWindow.location.reload();">
+    ↻ Refresh
+  </button>
+
+  <button onclick="window.open(document.getElementById('myframe').src, '_blank')">
+    ⧉ New tab
+  </button>
+
+  <button onclick="toggleFullscreen()">
+    ⛶ Fullscreen
+  </button>
+</div>
+
+<script>
+  function toggleFullscreen() {
+    const iframe = document.getElementById('myframe');
+
+    if (!document.fullscreenElement) {
+      if (iframe.requestFullscreen) {
+        iframe.requestFullscreen();
+      } else if (iframe.webkitRequestFullscreen) { 
+        iframe.webkitRequestFullscreen();
+      } else if (iframe.msRequestFullscreen) { 
+        iframe.msRequestFullscreen();
+      }
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+      }
+    }
+  }
+</script>
+
+</body>
+</html>
+
+ <!--Javascript Stuff-->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script>
+    lucide.createIcons();
+
+    const settingsBtn = document.getElementById('settings-btn');
+    const settingsPanel = document.getElementById('settings-panel');
+    const body = document.body;
+    const navBar = document.getElementById('nav-bar');
+
+    // Toggle settings
+    settingsBtn.addEventListener('click', () => {
+      settingsPanel.style.display = settingsPanel.style.display === 'flex' ? 'none' : 'flex';
+    });
+
+    // Load saved settings
+    window.addEventListener('load', () => {
+      if (localStorage.getItem('bgColor')) body.style.backgroundColor = localStorage.getItem('bgColor');
+      if (localStorage.getItem('fontColor')) body.style.color = localStorage.getItem('fontColor');
+      if (localStorage.getItem('fontStyle')) body.style.fontFamily = localStorage.getItem('fontStyle');
+      if (localStorage.getItem('bgImage')) {
+        body.style.backgroundImage = `url(${localStorage.getItem('bgImage')})`;
+        body.style.backgroundSize = 'cover';
+        body.style.backgroundPosition = 'center';
+      }
+      if (localStorage.getItem('fontGlow') === 'true') {
+        body.classList.add('font-glow');
+        document.getElementById('font-glow').checked = true;
+      }
+      if (localStorage.getItem('navPosition')) {
+        applyNavPosition(localStorage.getItem('navPosition'));
+        document.getElementById('nav-position').value = localStorage.getItem('navPosition');
+      }
+      if (localStorage.getItem('tabTitle')) document.title = localStorage.getItem('tabTitle');
+      if (localStorage.getItem('tabFavicon')) {
+        let link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+        link.rel = 'icon';
+        link.href = localStorage.getItem('tabFavicon');
+        document.head.appendChild(link);
+      }
+    });
+
+    // Background color
+    document.getElementById('bg-color').addEventListener('input', e => {
+      body.style.backgroundColor = e.target.value;
+      localStorage.setItem('bgColor', e.target.value);
+    });
+
+    // Font color
+    document.getElementById('font-color').addEventListener('input', e => {
+      body.style.color = e.target.value;
+      localStorage.setItem('fontColor', e.target.value);
+    });
+
+    // Font style
+    document.getElementById('font-style').addEventListener('change', e => {
+      body.style.fontFamily = e.target.value;
+      localStorage.setItem('fontStyle', e.target.value);
+    });
+
+    // Background image
+    document.getElementById('bg-image').addEventListener('change', e => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = ev => {
+          const url = ev.target.result;
+          body.style.backgroundImage = `url(${url})`;
+          body.style.backgroundSize = 'cover';
+          body.style.backgroundPosition = 'center';
+          localStorage.setItem('bgImage', url);
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // about:blank
+    document.getElementById('open-about-blank').addEventListener('click', () => {
+      const win = window.open('about:blank', '_blank');
+      const iframe = win.document.createElement('iframe');
+      iframe.src = location.href;
+      iframe.style.cssText = 'position:fixed;inset:0;border:none;width:100%;height:100%;';
+      win.document.body.appendChild(iframe);
+    });
+
+    // Tab cloak
+    document.getElementById('apply-cloak').addEventListener('click', () => {
+      const title = document.getElementById('tab-title').value.trim();
+      const favicon = document.getElementById('tab-favicon').value.trim();
+      if (title) {
+        document.title = title;
+        localStorage.setItem('tabTitle', title);
+      }
+      if (favicon) {
+        let link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+        link.rel = 'icon';
+        link.href = favicon;
+        document.head.appendChild(link);
+        localStorage.setItem('tabFavicon', favicon);
+      }
+    });
+
+    // Font glow
+    document.getElementById('font-glow').addEventListener('change', e => {
+      body.classList.toggle('font-glow', e.target.checked);
+      localStorage.setItem('fontGlow', e.target.checked);
+    });
+
+    // Nav position
+    document.getElementById('nav-position').addEventListener('change', e => {
+      const pos = e.target.value;
+      applyNavPosition(pos);
+      localStorage.setItem('navPosition', pos);
+    });
+
+    function applyNavPosition(pos) {
+      navBar.style.position = 'fixed';
+      navBar.style.transform = '';
+      navBar.style.flexDirection = 'row';
+      navBar.style.minWidth = '85vw';
+      navBar.style.width = 'auto';
+      navBar.style.height = 'auto';
+      navBar.style.minHeight = '';
+      navBar.style.borderRadius = '24px';
+
+      if (pos === 'top-center') {
+        navBar.style.top = '20px';
+        navBar.style.bottom = '';
+        navBar.style.left = '50%';
+        navBar.style.right = '';
+        navBar.style.transform = 'translateX(-50%)';
+      } else if (pos === 'bottom-center') {
+        navBar.style.top = '';
+        navBar.style.bottom = '20px';
+        navBar.style.left = '50%';
+        navBar.style.right = '';
+        navBar.style.transform = 'translateX(-50%)';
+      } else if (pos === 'left') {
+        navBar.style.top = '50%';
+        navBar.style.bottom = '';
+        navBar.style.left = '20px';
+        navBar.style.right = '';
+        navBar.style.transform = 'translateY(-50%)';
+        navBar.style.flexDirection = 'column';
+        navBar.style.minWidth = 'auto';
+        navBar.style.minHeight = '50vh';
+      } else if (pos === 'right') {
+        navBar.style.top = '50%';
+        navBar.style.bottom = '';
+        navBar.style.left = '';
+        navBar.style.right = '20px';
+        navBar.style.transform = 'translateY(-50%)';
+        navBar.style.flexDirection = 'column';
+        navBar.style.minWidth = 'auto';
+        navBar.style.minHeight = '50vh';
+      }
+    }
+
+    // Reset everything
+    document.getElementById('reset-settings').addEventListener('click', () => {
+      if (!confirm('Reset all settings to default?')) return;
+
+      localStorage.clear();
+
+      body.style.backgroundColor = '#87CEEB';
+      body.style.backgroundImage = '';
+      body.style.color = '#000000';
+      body.style.fontFamily = "'Fredoka', sans-serif";
+      body.classList.remove('font-glow');
+
+      document.getElementById('bg-color').value = '#87CEEB';
+      document.getElementById('font-color').value = '#000000';
+      document.getElementById('font-style').value = "'Fredoka', sans-serif";
+      document.getElementById('font-glow').checked = false;
+      document.getElementById('nav-position').value = 'top-center';
+      document.getElementById('tab-title').value = '';
+      document.getElementById('tab-favicon').value = '';
+
+      document.title = 'Arcady';
+      const link = document.querySelector("link[rel*='icon']");
+      if (link) link.remove();
+
+      applyNavPosition('top-center');
+      settingsPanel.style.display = 'none';
+    });
+  </script>
+</body>
+</html>

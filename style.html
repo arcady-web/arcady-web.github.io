@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bez a Boo Clicker</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Comic+Sans+MS:wght@400;700&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: "Comic Sans MS", "Comic Sans", cursive;
+      background: #0a0a0a;
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .header {
+      width: min(980px, 95vw);
+      background: #111111;
+      padding: 14px 30px;
+      border: 12px solid #ffffff;
+      border-bottom: none;
+      border-radius: 30px 30px 0 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 0 60px rgba(255,255,255,0.4);
+    }
+
+    .header-title { font-size: 2.4rem; font-weight: bold; text-shadow: 0 0 20px #ffffff; letter-spacing: 3px; }
+    .header-bezos { font-size: 2.1rem; font-weight: bold; background: rgba(0,0,0,0.8); padding: 8px 28px; border-radius: 50px; border: 4px solid #ffffff; text-shadow: 0 0 15px #ffffff; }
+
+    .game {
+      width: min(980px, 95vw);
+      height: 560px;
+      background: #111111;
+      border-radius: 0 0 30px 30px;
+      box-shadow: 0 0 80px rgba(255,255,255,0.5);
+      overflow: hidden;
+      border: 12px solid #ffffff;
+      border-top: none;
+      display: flex;
+      transition: background 0.8s;
+      position: relative;
+    }
+
+    .hard-mode { background: linear-gradient(135deg, #8b0000, #ff0000) !important; }
+
+    .clicker-panel {
+      flex: 0.62;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: #0a0a0a;
+      padding: 20px;
+    }
+
+    #bezaBoo {
+      width: 360px;
+      height: 360px;
+      object-fit: contain;
+      cursor: pointer;
+      transition: all 0.15s;
+      filter: drop-shadow(0 0 40px #ffffff);
+      border: 8px solid #ffffff;
+      border-radius: 50%;
+    }
+
+    #bezaBoo:active { transform: scale(0.88); }
+
+    .floating-text {
+      position: absolute;
+      font-size: 2.3rem;
+      font-weight: bold;
+      pointer-events: none;
+      text-shadow: 0 0 20px #ffffff;
+      animation: floatUp 1.3s forwards;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-190px); opacity: 0; }
+    }
+
+    .anger, #freakyNotice, #daddyNotice {
+      font-size: 1.75rem;
+      color: #ffffff;
+      text-align: center;
+      font-weight: bold;
+      animation: shake 0.4s infinite;
+      display: none;
+      border: 5px solid #ffffff;
+      padding: 14px 30px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+
+    #countdown {
+      font-size: 2rem;
+      background: #000;
+      color: #ff0000;
+      padding: 10px 35px;
+      border: 5px solid #ff0000;
+      border-radius: 999px;
+      display: none;
+      font-weight: bold;
+    }
+
+    @keyframes shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
+
+    .side-panel {
+      flex: 0.38;
+      background: #1a1a1a;
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      overflow-y: auto;
+      border-left: 8px solid #ffffff;
+    }
+
+    .stats { background: #222222; padding: 18px; border-radius: 18px; text-align: center; border: 4px solid #ffffff; }
+    .stat { font-size: 1.35rem; margin: 11px 0; text-shadow: 0 0 10px #ffffff; }
+
+    .upgrades { display: flex; flex-direction: column; gap: 13px; }
+
+    button {
+      font-family: "Comic Sans MS", cursive;
+      font-size: 1.25rem;
+      padding: 17px;
+      background: #222222;
+      color: #ffffff;
+      border: 5px solid #ffffff;
+      border-radius: 18px;
+      cursor: pointer;
+      transition: all 0.25s;
+      box-shadow: 0 8px 0 #000000;
+    }
+
+    button:hover { background: #333333; transform: translateY(-4px); box-shadow: 0 12px 0 #000000; }
+    button:active { transform: translateY(4px); box-shadow: 0 4px 0 #000000; }
+    button:disabled { background: #111111; border-color: #555555; color: #555555; cursor: not-allowed; }
+
+    .rebirth-btn, .casino-btn, #hardModeBtn {
+      background: #111111;
+      border-color: #ffffff;
+    }
+
+    #hardModeBtn {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      padding: 12px 24px;
+      font-size: 1.1rem;
+      background: #8b0000;
+      color: #fff;
+      border: 5px solid #fff;
+      z-index: 50;
+    }
+
+    .footer { text-align: center; font-size: 1rem; opacity: 0.8; margin-top: auto; line-height: 1.4; }
+
+    #settingsBtn {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      background: #000000;
+      color: #ffffff;
+      border: 4px solid #ffffff;
+      font-size: 2rem;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      box-shadow: 0 0 15px #ffffff;
+    }
+
+    .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.97); display: none; align-items: center; justify-content: center; z-index: 1000; }
+    .modal-content { background: #111111; padding: 35px; border-radius: 25px; width: 520px; border: 8px solid #ffffff; max-height: 88vh; overflow-y: auto; box-shadow: 0 0 60px #ffffff; }
+
+    #popup {
+      position: fixed;
+      top: 35%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 35px 70px;
+      font-size: 2.6rem;
+      font-weight: bold;
+      border-radius: 30px;
+      border: 10px solid #ffffff;
+      z-index: 2000;
+      display: none;
+      text-align: center;
+      box-shadow: 0 0 80px #ffffff;
+      animation: popupAnim 2.8s forwards;
+    }
+
+    @keyframes popupAnim {
+      0% { transform: translate(-50%, -50%) scale(0.4); opacity: 0; }
+      15% { transform: translate(-50%, -50%) scale(1.15); }
+      85% { transform: translate(-50%, -50%) scale(1); }
+      100% { transform: translate(-50%, -50%) scale(0.7); opacity: 0; }
+    }
+
+    .duplicate-img {
+      position: absolute;
+      width: 90px;
+      height: 90px;
+      cursor: pointer;
+      z-index: 100;
+      border: 4px solid #ffffff;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-title">BEZ A BOO CLICKER</div>
+    <div id="headerBezos" class="header-bezos">BEZOS: 0</div>
+  </div>
+
+  <div class="game" id="gameContainer">
+    <div class="clicker-panel">
+      <button id="settingsBtn">⚙️</button>
+      <img id="bezaBoo" src="features/tuff.png" alt="Bez a Boo">
+      
+      <div id="angerNotice" class="anger"></div>
+      <div id="freakyNotice" class="anger" style="color:#ff69b4;display:none;">FREAKY TIME!!! 💖</div>
+      <div id="daddyNotice" class="anger" style="color:#ffd700;display:none;">DADDY MODE!!! 👑</div>
+      <div id="countdown">TIME LEFT: 10</div>
+      
+      <div id="cpsDisplay" style="margin-top:22px;font-size:1.45rem;color:#ffffff;"></div>
+    </div>
+    
+    <div class="side-panel">
+      <div class="stats">
+        <div class="stat">Multiplier: <span id="multiDisplay">×1</span></div>
+        <div class="stat">Rebirth Bonus: <span id="rebirthDisplay">×1.0</span></div>
+        <div class="stat">Rebirths: <span id="rebirthCount">0</span></div>
+        <div class="stat">Total Clicked: <span id="totalClicks">0</span></div>
+      </div>
+      
+      <div class="upgrades">
+        <button id="btnMulti">Multiplier +1<br><small>Cost: 80</small></button>
+        <button id="btnAuto">Auto-Clicker +2/s<br><small>Cost: 220</small></button>
+        <button id="btnMegaAuto">Mega Auto +5/s<br><small>Cost: 2500</small></button>
+        <button id="btnBoost">15s ×8 BOOSTER!<br><small>Cost: 650</small></button>
+        <button id="btnAngerControl">Anger Control +1<br><small>Cost: 1200</small></button>
+        <button id="btnLucky">Lucky Charm (+0.5 perm)<br><small>Cost: 4500</small></button>
+        <button id="btnRebirth" class="rebirth-btn">REBIRTH<br><small>Requires 15,000</small></button>
+        <button id="btnCasino" class="casino-btn">🎲 OPEN CASINO</button>
+      </div>
+      
+      <div class="footer">She got call me biz a boo<br>Auto-Saves Every 8 Seconds</div>
+    </div>
+
+    <button id="hardModeBtn">HARD MODE OFF</button>
+  </div>
+
+  <!-- SETTINGS MODAL -->
+  <div id="settingsModal" class="modal">
+    <div class="modal-content">
+      <h2>⚙️ CUSTOM KEYBINDS</h2>
+      <div id="bindsContainer"></div>
+      <button id="closeSettings" style="width:100%;padding:18px;font-size:1.4rem;margin-top:20px;">CLOSE SETTINGS</button>
+    </div>
+  </div>
+
+  <!-- CASINO MODAL -->
+  <div id="casinoModal" class="modal">
+    <div class="modal-content">
+      <h2>🎲 BEZ A BOO CASINO</h2>
+      <button id="casinoCoinFlip" style="width:100%;padding:18px;margin:8px 0;font-size:1.35rem;background:#ff1493;">COIN FLIP (50% double)</button>
+      <button id="casinoDice" style="width:100%;padding:18px;margin:8px 0;font-size:1.35rem;background:#00bfff;">DICE ROLL (win on 4-6)</button>
+      <p style="text-align:center;margin:15px 0;">Bet amount:</p>
+      <input id="betInput" type="number" value="500" style="width:100%;padding:14px;font-size:1.4rem;text-align:center;background:#222;color:#fff;border:4px solid #fff;border-radius:15px;">
+      <button id="closeCasino" style="width:100%;margin-top:20px;padding:14px;font-size:1.3rem;">CLOSE CASINO</button>
+    </div>
+  </div>
+
+  <!-- ADMIN MODAL -->
+  <div id="adminModal" class="modal">
+    <div class="modal-content">
+      <h2>🔧 ADMIN PANEL</h2>
+      <button id="adminGive10k" style="width:100%;margin:8px 0;padding:16px;font-size:1.3rem;">+10,000 BEZOS</button>
+      <input id="adminAmount" type="number" placeholder="Custom amount" style="width:100%;padding:14px;margin:8px 0;background:#222;color:#fff;border:4px solid #fff;border-radius:15px;">
+      <button id="adminAddCustom" style="width:100%;margin:8px 0;padding:16px;font-size:1.3rem;">ADD CUSTOM BEZOS</button>
+      <button id="adminSetMulti" style="width:100%;margin:8px 0;padding:16px;font-size:1.3rem;">SET MULTIPLIER TO 10</button>
+      
+      <div style="margin-top:25px;border-top:3px solid #555;padding-top:20px;">
+        <h3 style="text-align:center;margin-bottom:15px;">FORCE FEELINGS</h3>
+        <button id="adminForceAnger" style="width:100%;margin:8px 0;padding:16px;font-size:1.3rem;background:#ff4444;">FORCE ANGER</button>
+        <button id="adminForceFreaky" style="width:100%;margin:8px 0;padding:16px;font-size:1.3rem;background:#ff69b4;">FORCE FREAKY</button>
+        <button id="adminForceDaddy" style="width:100%;margin:8px 0;padding:16px;font-size:1.3rem;background:#ffd700;color:#000;">FORCE DADDY</button>
+      </div>
+      
+      <button id="closeAdmin" style="width:100%;margin-top:25px;padding:16px;font-size:1.3rem;">CLOSE ADMIN</button>
+    </div>
+  </div>
+
+  <div id="popup"></div>
+
+  <script>
+    // ============== ALL VARIABLES ==============
+    let bezos = 0;
+    let multiplier = 1;
+    let autoCPS = 0;
+    let rebirthBonus = 1;
+    let rebirths = 0;
+    let totalClicks = 0;
+    let angerControl = 0;
+    let luckyCharm = 0;
+    let angerActive = false;
+    let freakyActive = false;
+    let daddyActive = false;
+    let currentCalmKey = '';
+    let calmPresses = 0;
+    const CALM_REQUIRED = 12;
+    let angerCountdown = 10;
+    let angerTimer = null;
+    let lastManualClick = 0;
+    let hardMode = false;
+    let duplicateTargets = [];
+    let popupTimer = null;
+
+    let multiCost = 80;
+    let autoCost = 220;
+    let megaAutoCost = 2500;
+    let boostCost = 650;
+    let angerControlCost = 1200;
+    let luckyCost = 4500;
+
+    let keybinds = { click: ' ', multi: '1', auto: '2', boost: '3', angerControl: '4', rebirth: 'r' };
+    let listeningFor = null;
+    let codeBuffer = '';
+
+    // ============== DOM ==============
+    const img = document.getElementById('bezaBoo');
+    const headerBezos = document.getElementById('headerBezos');
+    const gameContainer = document.getElementById('gameContainer');
+    const hardModeBtn = document.getElementById('hardModeBtn');
+    const popupEl = document.getElementById('popup');
+    const cpsDisplay = document.getElementById('cpsDisplay');
+    const multiDisplay = document.getElementById('multiDisplay');
+    const rebirthDisplay = document.getElementById('rebirthDisplay');
+    const rebirthCount = document.getElementById('rebirthCount');
+    const totalClicksDisplay = document.getElementById('totalClicks');
+    const angerNotice = document.getElementById('angerNotice');
+    const freakyNotice = document.getElementById('freakyNotice');
+    const daddyNotice = document.getElementById('daddyNotice');
+    const countdownEl = document.getElementById('countdown');
+
+    const btnMulti = document.getElementById('btnMulti');
+    const btnAuto = document.getElementById('btnAuto');
+    const btnMegaAuto = document.getElementById('btnMegaAuto');
+    const btnBoost = document.getElementById('btnBoost');
+    const btnAngerControl = document.getElementById('btnAngerControl');
+    const btnLucky = document.getElementById('btnLucky');
+    const btnRebirth = document.getElementById('btnRebirth');
+    const btnCasino = document.getElementById('btnCasino');
+
+    const settingsBtn = document.getElementById('settingsBtn');
+    const settingsModal = document.getElementById('settingsModal');
+    const bindsContainer = document.getElementById('bindsContainer');
+    const closeSettings = document.getElementById('closeSettings');
+
+    const casinoModal = document.getElementById('casinoModal');
+    const betInput = document.getElementById('betInput');
+    const casinoCoinFlip = document.getElementById('casinoCoinFlip');
+    const casinoDice = document.getElementById('casinoDice');
+    const closeCasino = document.getElementById('closeCasino');
+
+    const adminModal = document.getElementById('adminModal');
+    const closeAdmin = document.getElementById('closeAdmin');
+
+    // ============== AUDIO ==============
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playSFX(type) {
+      if (type === 'click') {
+        const o1 = audioCtx.createOscillator(); const o2 = audioCtx.createOscillator(); const g = audioCtx.createGain();
+        o1.type = 'sine'; o1.frequency.value = 720; o2.type = 'square'; o2.frequency.value = 1400;
+        o1.connect(g); o2.connect(g); g.connect(audioCtx.destination); g.gain.value = 0.45;
+        o1.start(); o2.start(); setTimeout(()=>{o1.stop();o2.stop();},45);
+      } else if (type === 'buy') {
+        const o = audioCtx.createOscillator(); const g = audioCtx.createGain();
+        o.type = 'sawtooth'; o.frequency.setValueAtTime(620, audioCtx.currentTime);
+        g.gain.value = 0.35; o.connect(g); g.connect(audioCtx.destination);
+        o.start(); o.frequency.linearRampToValueAtTime(1400, audioCtx.currentTime + 0.25);
+        setTimeout(() => o.stop(), 300);
+      } else if (type === 'boost') {
+        const n = audioCtx.createBufferSource(); const b = audioCtx.createBuffer(1, audioCtx.sampleRate*0.4, audioCtx.sampleRate);
+        const d = b.getChannelData(0); for(let i=0;i<d.length;i++) d[i]=Math.random()*2-1;
+        n.buffer = b; const f = audioCtx.createBiquadFilter(); f.type='lowpass'; f.frequency.value=1800;
+        n.connect(f); f.connect(audioCtx.destination); n.start();
+      } else if (type === 'anger') {
+        const o = audioCtx.createOscillator(); const g = audioCtx.createGain();
+        o.type = 'sawtooth'; o.frequency.value = 85; g.gain.value = 0.7;
+        o.connect(g); g.connect(audioCtx.destination); o.start();
+        g.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.9);
+        setTimeout(() => o.stop(), 950);
+      } else if (type === 'freaky') {
+        for(let i=0;i<5;i++) setTimeout(()=>{const o=audioCtx.createOscillator();const g=audioCtx.createGain();o.type='sine';o.frequency.value=920+Math.random()*420;g.gain.value=0.25;o.connect(g);g.connect(audioCtx.destination);o.start();g.gain.linearRampToValueAtTime(0,audioCtx.currentTime+0.18);setTimeout(()=>o.stop(),220);},i*60);
+      } else if (type === 'daddy') {
+        const o = audioCtx.createOscillator(); const g = audioCtx.createGain();
+        o.type = 'sine'; o.frequency.value = 520; g.gain.value = 0.6;
+        o.connect(g); g.connect(audioCtx.destination); o.start();
+        g.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 1.2);
+        setTimeout(() => o.stop(), 1300);
+      } else if (type === 'rebirth') {
+        const n = audioCtx.createBufferSource(); const b = audioCtx.createBuffer(1, audioCtx.sampleRate*0.8, audioCtx.sampleRate);
+        const d = b.getChannelData(0); for(let i=0;i<d.length;i++) d[i]=Math.random()*2-1;
+        n.buffer = b; const g = audioCtx.createGain(); g.gain.value = 0.65;
+        n.connect(g); g.connect(audioCtx.destination); n.start();
+      } else if (type === 'whistle') {
+        const o = audioCtx.createOscillator(); const g = audioCtx.createGain();
+        o.type = 'sine'; o.frequency.value = 1200; g.gain.value = 0.6;
+        o.connect(g); g.connect(audioCtx.destination); o.start();
+        g.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.4);
+        setTimeout(() => o.stop(), 450);
+      } else if (type === 'clap') {
+        const n = audioCtx.createBufferSource(); const b = audioCtx.createBuffer(1, audioCtx.sampleRate*0.15, audioCtx.sampleRate);
+        const d = b.getChannelData(0); for(let i=0;i<d.length;i++) d[i]=Math.random()*2-1;
+        n.buffer = b; n.connect(audioCtx.destination); n.start();
+      } else if (type === 'scream') {
+        const o = audioCtx.createOscillator(); const g = audioCtx.createGain();
+        o.type = 'sawtooth'; o.frequency.value = 180; g.gain.value = 0.8;
+        o.connect(g); g.connect(audioCtx.destination); o.start();
+        g.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.6);
+        setTimeout(() => o.stop(), 650);
+      }
+    }
+
+    function showPopup(text, color) {
+      popupEl.textContent = text;
+      popupEl.style.background = color;
+      popupEl.style.display = 'block';
+      setTimeout(() => { popupEl.style.display = 'none'; }, 2800);
+    }
+
+    function formatKey(k) { return k === ' ' ? 'SPACE' : k.toUpperCase(); }
+
+    function renderBinds() {
+      bindsContainer.innerHTML = `
+        <div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:2px solid #333;"><span>Manual Click</span><span class="current-key">${formatKey(keybinds.click)}</span><button class="change-btn" data-action="click">CHANGE</button></div>
+        <div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:2px solid #333;"><span>Buy Multiplier</span><span class="current-key">${formatKey(keybinds.multi)}</span><button class="change-btn" data-action="multi">CHANGE</button></div>
+        <div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:2px solid #333;"><span>Buy Auto-Clicker</span><span class="current-key">${formatKey(keybinds.auto)}</span><button class="change-btn" data-action="auto">CHANGE</button></div>
+        <div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:2px solid #333;"><span>Buy Booster</span><span class="current-key">${formatKey(keybinds.boost)}</span><button class="change-btn" data-action="boost">CHANGE</button></div>
+        <div style="display:flex;justify-content:space-between;padding:12px 0;"><span>Rebirth</span><span class="current-key">${formatKey(keybinds.rebirth)}</span><button class="change-btn" data-action="rebirth">CHANGE</button></div>
+      `;
+      document.querySelectorAll('.change-btn').forEach(btn => btn.addEventListener('click', () => { listeningFor = btn.dataset.action; btn.textContent = 'PRESS KEY...'; }));
+    }
+
+    function createFloatingText(x, y, amount) {
+      const t = document.createElement('div'); t.className = 'floating-text';
+      t.textContent = `+${Math.floor(amount)}`;
+      t.style.left = `${x-45}px`; t.style.top = `${y-45}px`;
+      t.style.color = daddyActive ? '#ffd700' : (freakyActive ? '#ff69b4' : '#ffffff');
+      document.querySelector('.clicker-panel').appendChild(t);
+      setTimeout(() => t.remove(), 1300);
+    }
+
+    // ============== ANGER MODE ==============
+    function triggerAnger() {
+      if (angerActive || freakyActive || daddyActive) return;
+      angerActive = true;
+      currentCalmKey = 'abcdefghijklmnopqrstuvwxyz'[Math.floor(Math.random()*26)];
+      calmPresses = 0; angerCountdown = 10;
+      angerNotice.innerHTML = `BEZ A BOO IS MAAAAAAD!!! 🔥<br>PRESS <span style="color:#ffff00">${currentCalmKey.toUpperCase()}</span> 12 TIMES!`;
+      angerNotice.style.display = 'block';
+      countdownEl.style.display = 'block';
+      countdownEl.textContent = `TIME LEFT: 10`;
+      img.src = 'features/tuff2.jpeg';
+      playSFX('anger');
+      gameContainer.style.animation = 'shake 0.4s infinite';
+      if (angerTimer) clearInterval(angerTimer);
+      angerTimer = setInterval(() => {
+        angerCountdown--;
+        countdownEl.textContent = `TIME LEFT: ${angerCountdown}`;
+        if (angerCountdown <= 0) {
+          clearInterval(angerTimer);
+          bezos = Math.floor(bezos * 0.5);
+          calmAnger();
+          updateUI();
+        }
+      }, 1000);
+    }
+
+    function calmAnger() {
+      if (angerTimer) clearInterval(angerTimer);
+      angerActive = false;
+      angerNotice.style.display = 'none';
+      countdownEl.style.display = 'none';
+      img.src = 'features/tuff.png';
+      gameContainer.style.animation = '';
+    }
+
+    function triggerFreaky() {
+      if (freakyActive || angerActive || daddyActive) return;
+      freakyActive = true;
+      freakyNotice.style.display = 'block';
+      img.src = 'features/freaky.png';
+      gameContainer.style.background = 'linear-gradient(135deg, #ff1493, #ff69b4)';
+      playSFX('freaky');
+      setTimeout(() => {
+        freakyActive = false;
+        freakyNotice.style.display = 'none';
+        img.src = 'features/tuff.png';
+        gameContainer.style.background = '#111111';
+      }, 8000);
+    }
+
+    function triggerDaddy() {
+      if (daddyActive || angerActive || freakyActive) return;
+      daddyActive = true;
+      daddyNotice.style.display = 'block';
+      img.src = 'features/imog.png';
+      gameContainer.style.background = 'linear-gradient(#ffd700, #ff8c00)';
+      playSFX('daddy');
+      setTimeout(() => {
+        daddyActive = false;
+        daddyNotice.style.display = 'none';
+        img.src = 'features/tuff.png';
+        gameContainer.style.background = '#111111';
+      }, 8000);
+    }
+
+    // ============== UPDATE UI ==============
+    function updateUI() {
+      const displayText = `BEZOS: ${Math.floor(bezos).toLocaleString()}`;
+      headerBezos.textContent = displayText;
+      multiDisplay.textContent = `×${multiplier}`;
+      rebirthDisplay.textContent = `×${rebirthBonus.toFixed(1)}`;
+      rebirthCount.textContent = rebirths;
+      totalClicksDisplay.textContent = totalClicks.toLocaleString();
+      cpsDisplay.textContent = `Auto: ${autoCPS}/s`;
+
+      btnMulti.textContent = `Multiplier +1\nCost: ${multiCost}`;
+      btnAuto.textContent = `Auto-Clicker +2/s\nCost: ${autoCost}`;
+      btnMegaAuto.textContent = `Mega Auto +5/s\nCost: ${megaAutoCost}`;
+      btnBoost.textContent = `15s ×8 BOOSTER!\nCost: ${boostCost}`;
+      btnAngerControl.textContent = `Anger Control +1\nCost: ${angerControlCost}`;
+      btnLucky.textContent = `Lucky Charm (+0.5 perm)\nCost: ${luckyCost}`;
+      
+      btnMulti.disabled = bezos < multiCost;
+      btnAuto.disabled = bezos < autoCost;
+      btnMegaAuto.disabled = bezos < megaAutoCost;
+      btnBoost.disabled = bezos < boostCost;
+      btnAngerControl.disabled = bezos < angerControlCost;
+      btnLucky.disabled = bezos < luckyCost;
+      btnRebirth.disabled = bezos < 15000;
+    }
+
+    function performClick(e) {
+      const now = Date.now();
+      if (now - lastManualClick < 80) return;
+      lastManualClick = now;
+
+      let bonus = 1;
+      if (freakyActive) bonus = 2.5;
+      if (daddyActive) bonus = 10;
+      let clickValue = multiplier * rebirthBonus * bonus;
+      bezos += clickValue;
+      totalClicks++;
+
+      const rect = img.getBoundingClientRect();
+      createFloatingText(rect.left + rect.width/2, rect.top + rect.height/2, clickValue);
+      playSFX('click');
+
+      if (!angerActive && !freakyActive && !daddyActive) {
+        if (Math.random() < 0.0025) triggerAnger();
+        else if (Math.random() < 0.004) triggerFreaky();
+        else if (Math.random() < 0.0006) triggerDaddy();
+      }
+
+      updateUI();
+    }
+
+    // ============== HARD MODE CHALLENGES ==============
+    function startDuplicateChallenge() {
+      if (!hardMode) return;
+      const panel = document.querySelector('.clicker-panel');
+      duplicateTargets = [];
+      for (let i = 0; i < 5; i++) {
+        const dup = document.createElement('img');
+        dup.src = 'features/tuff.png';
+        dup.className = 'duplicate-img';
+        dup.style.left = Math.random() * 70 + 10 + '%';
+        dup.style.top = Math.random() * 60 + 20 + '%';
+        dup.onclick = () => {
+          dup.remove();
+          duplicateTargets = duplicateTargets.filter(t => t !== dup);
+          if (duplicateTargets.length === 0) clearTimeout(popupTimer);
+        };
+        panel.appendChild(dup);
+        duplicateTargets.push(dup);
+      }
+
+      let timeLeft = 10;
+      const timer = setInterval(() => {
+        timeLeft--;
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          if (duplicateTargets.length > 0) {
+            bezos = Math.floor(bezos * 0.7);
+            duplicateTargets.forEach(d => d.remove());
+            showPopup("TIME'S UP! -30% BEZOS 😭", '#ff0000');
+          }
+          updateUI();
+        }
+      }, 1000);
+
+      popupTimer = setTimeout(() => duplicateTargets.forEach(d => d.remove()), 10500);
+    }
+
+    function startAngryPopup() {
+      if (!hardMode) return;
+      const popupImg = document.createElement('img');
+      popupImg.src = 'features/tuff2.jpeg';
+      popupImg.style.position = 'absolute';
+      popupImg.style.width = '120px';
+      popupImg.style.left = Math.random() * 70 + 10 + '%';
+      popupImg.style.top = Math.random() * 60 + 20 + '%';
+      popupImg.style.zIndex = '200';
+      popupImg.style.border = '6px solid #ff0000';
+      document.querySelector('.clicker-panel').appendChild(popupImg);
+
+      const tauntBtn = document.createElement('button');
+      tauntBtn.textContent = "TAUNT!";
+      tauntBtn.style.position = 'fixed';
+      tauntBtn.style.bottom = '30px';
+      tauntBtn.style.right = '30px';
+      tauntBtn.style.padding = '16px 32px';
+      tauntBtn.style.fontSize = '1.4rem';
+      tauntBtn.style.background = '#ff0000';
+      tauntBtn.style.color = '#fff';
+      tauntBtn.style.border = '6px solid #fff';
+      document.body.appendChild(tauntBtn);
+
+      let timeLeft = 5;
+      const timer = setInterval(() => { timeLeft--; if (timeLeft <= 0) clearInterval(timer); }, 1000);
+
+      tauntBtn.onclick = () => {
+        const sounds = ['whistle','clap','scream'];
+        playSFX(sounds[Math.floor(Math.random()*3)]);
+        popupImg.remove();
+        tauntBtn.remove();
+        clearTimeout(popupTimer);
+      };
+
+      popupTimer = setTimeout(() => {
+        popupImg.remove();
+        tauntBtn.remove();
+        bezos = Math.floor(bezos * 0.7);
+        showPopup("TAUNT FAILED! -30% BEZOS", '#ff0000');
+        updateUI();
+      }, 5200);
+    }
+
+    function startUltraAngry() {
+      if (!hardMode) return;
+      gameContainer.style.animation = 'shake 0.1s infinite';
+      let timeLeft = 10;
+      let progress = 0;
+      const combo = ['w','h','i','s','t','l','e'];
+
+      const interval = setInterval(() => {
+        timeLeft--;
+        if (timeLeft <= 0) {
+          clearInterval(interval);
+          bezos = 0;
+          showPopup("ULTRA ANGRY WINS — YOU LOST EVERYTHING!", '#ff0000');
+          gameContainer.style.animation = '';
+          updateUI();
+        }
+      }, 1000);
+
+      const keyListener = (e) => {
+        if (e.key.toLowerCase() === combo[progress]) progress++;
+        if (progress >= combo.length) {
+          clearInterval(interval);
+          gameContainer.style.animation = '';
+          document.removeEventListener('keydown', keyListener);
+          showPopup("CALMED DOWN! SAVED!", '#00ff00');
+        }
+      };
+      document.addEventListener('keydown', keyListener);
+    }
+
+    // Trigger hard mode challenges
+    setInterval(() => {
+      if (!hardMode) return;
+      const r = Math.random();
+      if (r < 0.3) startDuplicateChallenge();
+      else if (r < 0.6) startAngryPopup();
+      else startUltraAngry();
+    }, 35000);
+
+    // ============== KEYBOARD ==============
+    document.addEventListener('keydown', e => {
+      codeBuffer += e.key;
+      if (codeBuffer.length > 6) codeBuffer = codeBuffer.slice(-6);
+      if (codeBuffer === '996155') {
+        adminModal.style.display = 'flex';
+        codeBuffer = '';
+      }
+
+      if (listeningFor) {
+        const newKey = e.key === ' ' ? ' ' : e.key.toLowerCase();
+        keybinds[listeningFor] = newKey;
+        listeningFor = null;
+        renderBinds();
+        saveGame();
+        return;
+      }
+
+      const pressed = e.key === ' ' ? ' ' : e.key.toLowerCase();
+
+      if (pressed === keybinds.click) performClick(e);
+      else if (pressed === keybinds.multi) btnMulti.click();
+      else if (pressed === keybinds.auto) btnAuto.click();
+      else if (pressed === keybinds.boost) btnBoost.click();
+      else if (pressed === keybinds.rebirth) btnRebirth.click();
+      else if (angerActive && pressed === currentCalmKey) {
+        calmPresses++;
+        if (calmPresses >= CALM_REQUIRED) calmAnger();
+      }
+    });
+
+    img.addEventListener('click', performClick);
+
+    // ============== UPGRADES ==============
+    btnMulti.addEventListener('click', () => { if (bezos >= multiCost) { bezos -= multiCost; multiplier++; multiCost = Math.floor(multiCost * 1.45); playSFX('buy'); updateUI(); } });
+    btnAuto.addEventListener('click', () => { if (bezos >= autoCost) { bezos -= autoCost; autoCPS += 2; autoCost = Math.floor(autoCost * 1.55); playSFX('buy'); updateUI(); } });
+    btnMegaAuto.addEventListener('click', () => { if (bezos >= megaAutoCost) { bezos -= megaAutoCost; autoCPS += 5; megaAutoCost = Math.floor(megaAutoCost * 1.6); playSFX('buy'); updateUI(); } });
+    btnBoost.addEventListener('click', () => { if (bezos >= boostCost) { bezos -= boostCost; const old = multiplier; multiplier *= 8; playSFX('boost'); setTimeout(() => { multiplier = old; updateUI(); }, 15000); updateUI(); } });
+    btnAngerControl.addEventListener('click', () => { if (bezos >= angerControlCost) { bezos -= angerControlCost; angerControl++; angerControlCost = Math.floor(angerControlCost * 1.7); playSFX('buy'); updateUI(); } });
+    btnLucky.addEventListener('click', () => { if (bezos >= luckyCost) { bezos -= luckyCost; luckyCharm += 0.5; rebirthBonus += 0.5; luckyCost = Math.floor(luckyCost * 1.65); playSFX('buy'); updateUI(); } });
+    btnRebirth.addEventListener('click', () => {
+      if (bezos >= 15000) {
+        rebirths++;
+        rebirthBonus += 0.35 + (rebirths * 0.15) + luckyCharm;
+        playSFX('rebirth');
+        bezos = 0; multiplier = 1; autoCPS = 0;
+        multiCost = 80; autoCost = 220; megaAutoCost = 2500; boostCost = 650; angerControlCost = 1200; luckyCost = 4500;
+        calmAnger(); freakyActive = false; daddyActive = false;
+        freakyNotice.style.display = 'none'; daddyNotice.style.display = 'none';
+        img.src = 'features/tuff.png'; gameContainer.style.background = '#111111';
+        updateUI();
+      }
+    });
+
+    // ============== CASINO ==============
+    btnCasino.addEventListener('click', () => casinoModal.style.display = 'flex');
+
+    function casinoBet() {
+      let bet = parseFloat(betInput.value) || 0;
+      if (bet <= 0 || bet > bezos) return 0;
+      bezos -= bet;
+      return bet;
+    }
+
+    casinoCoinFlip.addEventListener('click', () => {
+      const bet = casinoBet();
+      if (!bet) return;
+      if (Math.random() < 0.5) casinoWinLose(true, bet);
+      else casinoWinLose(false, bet);
+    });
+
+    casinoDice.addEventListener('click', () => {
+      const bet = casinoBet();
+      if (!bet) return;
+      const roll = Math.floor(Math.random() * 6) + 1;
+      if (roll >= 4) casinoWinLose(true, bet);
+      else casinoWinLose(false, bet);
+    });
+
+    function casinoWinLose(won, amount) {
+      if (won) {
+        bezos += amount * 2;
+        showPopup(`WINNER! +${amount*2} BEZOS 🎉`, '#00ff00');
+        playSFX('boost');
+      } else {
+        showPopup('BET LOST!', '#ff0000');
+        playSFX('anger');
+      }
+      updateUI();
+    }
+
+    closeCasino.addEventListener('click', () => casinoModal.style.display = 'none');
+
+    // ============== ADMIN ==============
+    document.getElementById('adminGive10k').onclick = () => { bezos += 10000; updateUI(); };
+    document.getElementById('adminAddCustom').onclick = () => { bezos += parseFloat(document.getElementById('adminAmount').value)||0; updateUI(); };
+    document.getElementById('adminSetMulti').onclick = () => { multiplier = 10; updateUI(); };
+    document.getElementById('adminForceAnger').onclick = () => { triggerAnger(); adminModal.style.display = 'none'; };
+    document.getElementById('adminForceFreaky').onclick = () => { triggerFreaky(); adminModal.style.display = 'none'; };
+    document.getElementById('adminForceDaddy').onclick = () => { triggerDaddy(); adminModal.style.display = 'none'; };
+    closeAdmin.onclick = () => adminModal.style.display = 'none';
+
+    // ============== HARD MODE ==============
+    hardModeBtn.addEventListener('click', () => {
+      hardMode = !hardMode;
+      hardModeBtn.textContent = hardMode ? "HARD MODE ON 🔥" : "HARD MODE OFF";
+      hardModeBtn.style.background = hardMode ? "#8b0000" : "#111111";
+      if (hardMode) gameContainer.classList.add('hard-mode');
+      else gameContainer.classList.remove('hard-mode');
+    });
+
+    // ============== SAVE / LOAD ==============
+    function saveGame() {
+      const saveData = { bezos, multiplier, autoCPS, rebirthBonus, rebirths, totalClicks, angerControl, luckyCharm, multiCost, autoCost, megaAutoCost, boostCost, angerControlCost, luckyCost, keybinds };
+      localStorage.setItem('bezabooSave', JSON.stringify(saveData));
+    }
+
+    function loadGame() {
+      const saved = localStorage.getItem('bezabooSave');
+      if (saved) {
+        const data = JSON.parse(saved);
+        bezos = data.bezos || 0;
+        multiplier = data.multiplier || 1;
+        autoCPS = data.autoCPS || 0;
+        rebirthBonus = data.rebirthBonus || 1;
+        rebirths = data.rebirths || 0;
+        totalClicks = data.totalClicks || 0;
+        angerControl = data.angerControl || 0;
+        luckyCharm = data.luckyCharm || 0;
+        multiCost = data.multiCost || 80;
+        autoCost = data.autoCost || 220;
+        megaAutoCost = data.megaAutoCost || 2500;
+        boostCost = data.boostCost || 650;
+        angerControlCost = data.angerControlCost || 1200;
+        luckyCost = data.luckyCost || 4500;
+        if (data.keybinds) keybinds = data.keybinds;
+      }
+      updateUI();
+    }
+
+    // ============== SETTINGS MODAL ==============
+    settingsBtn.addEventListener('click', () => { renderBinds(); settingsModal.style.display = 'flex'; });
+    closeSettings.addEventListener('click', () => { settingsModal.style.display = 'none'; listeningFor = null; });
+
+    // ============== AUTO CLICKER ==============
+    setInterval(() => {
+      if (autoCPS > 0) {
+        let bonus = 1;
+        if (freakyActive) bonus = 2.5;
+        if (daddyActive) bonus = 10;
+        bezos += autoCPS * multiplier * rebirthBonus * bonus;
+        updateUI();
+      }
+    }, 1000);
+
+    // ============== STARTUP ==============
+    loadGame();
+    setInterval(saveGame, 8000);
+    window.addEventListener('beforeunload', saveGame);
+    updateUI();
+  </script>
+</body>
+</html>
