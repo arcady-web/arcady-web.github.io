@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Search the world's information, including webpages, images, videos and more. Ghoogle has many special features to help you find exactly what you're looking for.">
+    <title>Ghoogle</title>
+    <link rel="stylesheet" href="google/css/styles.css">
+    <link rel="icon" href="https://www.google.com/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js" defer></script>
+
+    
+    <script
+    src="https://cdn.telemetrydeck.com/websdk/telemetrydeck.min.js"
+    data-app-id="6BE4FBAD-F003-4896-8C68-BD950BACF794">
+    </script>
+    
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="left-nav">
+                <a href="#">About</a>
+                <a href="#">Store</a>
+            </div>
+            <div class="right-nav">
+                <a href="#">Gmail</a>
+                <a href="#">Images</a>
+                <button class="apps-button">
+                    <img src="google/assets/apps.svg" alt="Google apps">
+                </button>
+                <button class="sign-in">Sign in</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="logo-container">
+            <img src="google/assets/ghoogle.png" alt="Google" class="logo">
+        </div>
+        <div class="search-container">
+                <form class="search-box" id="uv-form">
+                    <img src="google/assets/search.svg" alt="Search" class="search-icon">
+
+                    <input id="uv-search-engine" value="https://duckduckgo.com/?q=%s" type="hidden"/>
+                    <input id="uv-address" type="text" placeholder=" "  class="search-input" class="form__input" autofocus autocomplete="off"/>
+
+                    <img src="google/assets/mic.svg" alt="Voice search" class="mic-icon">
+                    <img src="google/assets/lens.svg" alt="Lens search" class="lens-icon">
+                </form>
+            <div class="search-buttons">
+                <button id="startConfetti">Google Search</button>
+                <button onclick="autofill('https://duck.ai')">I'm Feeling Lucky</button>
+            </div>
+            <div class="desc left-margin">
+                <p id="uv-error"></p>
+                <pre id="uv-error-code"></pre>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-bottom">
+            <div class="footer-left">
+                <a href="https://discord.gg/pYBmQTfbDh">Advertising</a>
+                <a href="https://discord.gg/pYBmQTfbDh">Business</a>
+                <a href="https://discord.gg/pYBmQTfbDh">How Search works</a>
+            </div>
+            <span class="carbon">
+                <img src="google/assets/leaf.svg" alt="Leaf icon">
+                Our third decade of climate action: join us
+            </span>
+            <div class="footer-right">
+                <a href="https://discord.gg/pYBmQTfbDh" >Privacy</a>
+                <a href="https://discord.gg/pYBmQTfbDh" >Terms</a>
+                <a href="#" onclick="autofill('benrogo.net')">Settings</a>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="uv/uv.bundle.js" charset="UTF-8"></script>
+    <script src="uv/uv.config.js" charset="UTF-8"></script>
+    <script src="register-sw.js" charset="UTF-8"></script>
+    <script src="search.js" charset="UTF-8"></script>
+    <script src="index.js" charset="UTF-8"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/eruda"></script> add this later when i ifram everything -->
+    
+    <script src="fireworks.js"></script>
+</body>
+</html>

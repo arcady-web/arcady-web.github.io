@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Error 404 (Not Found)!!1</title>
+    <link rel="icon" href="https://www.google.com/favicon.ico" type="image/x-icon">
+  </head>
+
+  <body style="font-family: arial, sans-serif; background: #fff; margin: 0; padding: 0;">
+    <div style="margin: 40px auto; max-width: 600px; text-align: center;">
+      <a href="/" style="text-decoration: none; display: inline-block;">
+        <img src="/google/assets/ghoogle.png" alt="Google" style="width: 200px; margin-bottom: 20px;">
+      </a>
+      <div style="color: #202124; font-size: 32px; margin: 20px 0;">404. That's an error.</div>
+      <div style="color: #5f6368; font-size: 16px; line-height: 1.5;">The requested URL was not found on this server.<br>That's all we know.</div>
+      <div style="margin-top: 30px;">
+        <button id="uv-register-sw" style="background: #1a73e8; color: white; border: none; padding: 10px 24px; border-radius: 4px; font-size: 14px; cursor: pointer; transition: transform 0.1s, background-color 0.1s;" onmousedown="this.style.transform='scale(0.95)';this.style.backgroundColor='#1557b0'" onmouseup="this.style.transform='';this.style.backgroundColor='#1a73e8'" onmouseleave="this.style.transform='';this.style.backgroundColor='#1a73e8'">
+          Register Service Worker
+        </button>
+      </div>
+      <p id="uv-error" style="color: #d93025; margin-top: 20px;"></p>
+      <code id="uv-error-code" style="display: block; margin-top: 10px; color: #5f6368;"></code>
+    </div>
+    <script src="/uv/uv.bundle.js" charset="UTF-8"></script>
+    <script src="/uv/uv.config.js"></script>
+    <script src="/register-sw.js"></script>
+    <script>
+      document.getElementById('uv-register-sw').addEventListener('click', async () => {
+        try {
+          await registerSW();
+          setTimeout(() => location.reload(), 2000);
+        } catch (err) {
+          document.getElementById('uv-error').textContent = err.toString();
+          document.getElementById('uv-error-code').textContent = err.stack;
+        }
+      });
+    </script>
+  </body>
+</html>
