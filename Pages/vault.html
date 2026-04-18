@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vault | Geode</title>
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="page-header">
+      <a class="home-link" href="../index.html" aria-label="Back to home"><img src="../features/assets/buttons/back.png" alt="Home"></a>
+      <div class="page-title">
+        <h1>Vault</h1>
+      </div>
+    </header>
+
+    <div class="search-toolbar">
+      <label class="search-input-wrapper" for="gameSearch">
+        <input id="gameSearch" class="search-input" type="search" placeholder="Enter a level, user, or ID" aria-label="Search games" />
+      </label>
+      <button type="button" class="search-button" id="searchButton" aria-label="Search games">
+        <img src="../features/assets/buttons/search.png" alt="Search">
+      </button>
+    </div>
+
+    <div class="page-grid" id="pageGrid">
+      <button class="page-box" data-url="https://en.wikipedia.org/wiki/Archive" aria-label="Open Archive" type="button">
+        <img class="box-image" src="https://via.placeholder.com/900x520/3b1f3f/ffffff?text=Archive" alt="Archive image preview" />
+      </button>
+      <button class="page-box" data-url="https://en.wikipedia.org/wiki/Vault" aria-label="Open Vault" type="button">
+        <img class="box-image" src="https://via.placeholder.com/900x520/2b2b5f/ffffff?text=Vault" alt="Vault image preview" />
+      </button>
+      <button class="page-box" data-url="https://www.example.com/" aria-label="Open Example site" type="button">
+        <img class="box-image" src="https://via.placeholder.com/900x520/212a3a/ffffff?text=Example+Vault" alt="Example vault image preview" />
+      </button>
+    </div>
+  </div>
+
+  <div class="iframe-overlay" id="iframeOverlay" aria-hidden="true">
+    <div class="iframe-panel">
+      <div class="iframe-toolbar">
+        <div class="frame-title" id="frameTitle">Preview</div>
+        <button class="iframe-close-button" id="closeOverlay"><img src="../features/assets/buttons/close.png" alt="Close"></button>
+      </div>
+      <iframe id="previewFrame" src="" title="Vault preview"></iframe>
+      <div class="iframe-bottom-actions">
+        <button type="button" id="refreshButton"><img src="../features/assets/buttons/refresh.png" alt="Refresh">Refresh</button>
+        <button type="button" id="openNewButton"><img src="../features/assets/buttons/plus.png" alt="Open in new tab">New Tab</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const overlay = document.getElementById('iframeOverlay');
+    const frame = document.getElementById('previewFrame');
+    const titleEl = document.getElementById('frameTitle');
+    let currentUrl = '';
+    const searchInput = document.getElementById('gameSearch');
+    const searchButton = document.getElementById('searchButton');
+
+    function updateSearchFilter() {
+      const query = searchInput.value.trim().toLowerCase();
+      document.querySelectorAll('.page-box').forEach(box => {
+        const name = (box.dataset.name || box.getAttribute('aria-label') || '').toLowerCase();
+        box.style.display = name.includes(query) ? '' : 'none';
+      });
+    }
+
+    searchInput.addEventListener('input', updateSearchFilter);
+    searchButton.addEventListener('click', updateSearchFilter);
+    searchInput.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        updateSearchFilter();
+      }
+    });
+
+    function openOverlay(url) {
+      currentUrl = url;
+      titleEl.textContent = url.replace(/^https?:\/\//, '');
+      frame.src = url;
+      overlay.classList.add('active');
+      overlay.setAttribute('aria-hidden', 'false');
+    }
+
+    document.querySelectorAll('.page-box').forEach(box => {
+      box.addEventListener('click', () => openOverlay(box.dataset.url));
+    });
+
+    function closeFrame() {
+      overlay.classList.remove('active');
+      overlay.setAttribute('aria-hidden', 'true');
+      frame.src = '';
+    }
+
+    document.getElementById('refreshButton').addEventListener('click', () => {
+      if (currentUrl) frame.src = currentUrl;
+    });
+
+    document.getElementById('openNewButton').addEventListener('click', () => {
+      if (currentUrl) window.open(encodeURI(currentUrl), '_blank');
+    });
+    const closeButton = document.getElementById('closeOverlay');
+    closeButton.addEventListener('click', closeFrame);
+    overlay.addEventListener('click', event => {
+      if (event.target === overlay) closeFrame();
+    });
+  </script>
+</body>
+</html>

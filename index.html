@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Geode</title>
+  <link rel="icon" href="features/assets/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <main class="smash-shell">
+      <div class="smash-layout">
+        <section class="smash-card smash-red card-games" data-link="Pages/games.html">
+          <span class="smash-title">Games</span>
+        </section>
+
+        <section class="smash-card smash-blue card-websites" data-link="Pages/websites.html">
+          <span class="smash-title">Websites</span>
+        </section>
+
+        <section class="smash-card smash-green card-proxy" data-link="Pages/proxy.html">
+          <span class="smash-title">Proxys</span>
+        </section>
+
+        <div class="smash-circle">
+          <div class="circle-glow"></div>
+          <div class="circle-inner">
+            <img src="features/assets/icons/geode.png" alt="Geode" />
+            <div class="circle-arrow"></div>
+          </div>
+        </div>
+
+        <section class="smash-card smash-pink card-vault" data-link="Pages/vault.html">
+          <span class="smash-title">Vault</span>
+        </section>
+
+        <section class="smash-card smash-gold card-chat" data-link="Pages/chat.html">
+          <span class="smash-title">Chat</span>
+        </section>
+
+        <section class="smash-card smash-purple card-ai" data-link="Pages/ai.html">
+          <span class="smash-title">AI</span>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    let currentIndex = 0;
+    const cards = Array.from(document.querySelectorAll('.smash-card[data-link]'));
+    const arrow = document.querySelector('.circle-arrow');
+    let isTransitioning = false;
+
+    // Arrow rotation angles for each card position - pointing outward from circle
+    const arrowAngles = [315, 45, 270, 90, 225, 135];
+
+    // Simple directional navigation - adjacent boxes only
+    const directionalMap = {
+      0: { up: 0, down: 2, left: 0, right: 1 }, // Games: up->Games, down->Proxys, left->Games, right->Websites
+      1: { up: 1, down: 3, left: 0, right: 1 }, // Websites: up->Websites, down->Vault, left->Games, right->Websites
+      2: { up: 0, down: 4, left: 2, right: 3 }, // Proxys: up->Games, down->Chat, left->Proxys, right->Vault
+      3: { up: 1, down: 5, left: 2, right: 3 }, // Vault: up->Websites, down->AI, left->Proxys, right->Vault
+      4: { up: 2, down: 4, left: 4, right: 5 }, // Chat: up->Proxys, down->Chat, left->Chat, right->AI
+      5: { up: 3, down: 5, left: 4, right: 5 }  // AI: up->Vault, down->AI, left->Chat, right->AI
+    };
+
+    function focusCard(index, direction = null) {
+      if (cards.length === 0 || isTransitioning) return;
+
+      isTransitioning = true;
+
+      // Ensure index is within bounds
+      const newIndex = ((index % cards.length) + cards.length) % cards.length;
+
+      // Remove focus from current card
+      cards[currentIndex].classList.remove('focused');
+      cards[currentIndex].tabIndex = -1;
+
+      // Set focus to new card
+      currentIndex = newIndex;
+      cards[currentIndex].classList.add('focused');
+      cards[currentIndex].tabIndex = 0;
+
+      // Smooth arrow rotation
+      if (arrow) {
+        const currentAngle = arrowAngles[currentIndex];
+        arrow.style.transform = `translate(-50%, -50%) rotate(${currentAngle}deg) translateY(-190px)`;
+      }
+
+      // Focus the card after a short delay for smooth transition
+      setTimeout(() => {
+        cards[currentIndex].focus();
+        isTransitioning = false;
+      }, 150);
+    }
+
+    // Enhanced directional keyboard navigation
+    function handleKeyNavigation(event) {
+      if (isTransitioning) return;
+
+      const currentMap = directionalMap[currentIndex];
+
+      switch(event.key) {
+        case 'ArrowUp':
+        case 'w':
+        case 'W':
+          event.preventDefault();
+          focusCard(currentMap.up, 'up');
+          break;
+        case 'ArrowDown':
+        case 's':
+        case 'S':
+          event.preventDefault();
+          focusCard(currentMap.down, 'down');
+          break;
+        case 'ArrowLeft':
+        case 'a':
+        case 'A':
+          event.preventDefault();
+          focusCard(currentMap.left, 'left');
+          break;
+        case 'ArrowRight':
+        case 'd':
+        case 'D':
+          event.preventDefault();
+          focusCard(currentMap.right, 'right');
+          break;
+        case 'Enter':
+          event.preventDefault();
+          // Check if any card is being hovered and click it
+          const hoveredCard = document.querySelector('.smash-card:hover');
+          if (hoveredCard) {
+            const link = hoveredCard.dataset.link;
+            if (link) window.location.href = link;
+          } else {
+            // If no hover, use the focused card
+            const focusedCard = cards[currentIndex];
+            const link = focusedCard.dataset.link;
+            if (link) window.location.href = link;
+          }
+          break;
+        case '1':
+          event.preventDefault();
+          focusCard(0);
+          break;
+        case '2':
+          event.preventDefault();
+          focusCard(1);
+          break;
+        case '3':
+          event.preventDefault();
+          focusCard(2);
+          break;
+        case '4':
+          event.preventDefault();
+          focusCard(3);
+          break;
+        case '5':
+          event.preventDefault();
+          focusCard(4);
+          break;
+        case '6':
+          event.preventDefault();
+          focusCard(5);
+          break;
+      }
+    }
+
+    // Setup event listeners
+    cards.forEach((card, index) => {
+      card.tabIndex = index === 0 ? 0 : -1;
+      card.role = 'button';
+
+      card.addEventListener('click', () => {
+        const href = card.dataset.link;
+        if (href) window.location.href = href;
+      });
+    });
+
+    // Global keyboard listener for better responsiveness
+    document.addEventListener('keydown', handleKeyNavigation);
+
+    // Focus first card on load
+    if (cards.length > 0) {
+      focusCard(0);
+    }
+  </script>
+</body>
+</html>

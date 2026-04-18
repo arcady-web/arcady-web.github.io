@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Games | Geode</title>
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="page-header">
+      <a class="home-link" href="../index.html" aria-label="Back to home"><img src="../features/assets/buttons/back.png" alt="Home"></a>
+      <div class="page-title">
+        <h1>Games</h1>
+      </div>
+    </header>
+
+    <div class="search-toolbar">
+      <label class="search-input-wrapper" for="gameSearch">
+        <input id="gameSearch" class="search-input" type="search" placeholder="Enter a level, user, or ID" aria-label="Search games" />
+      </label>
+      <button type="button" class="search-button" id="searchButton" aria-label="Search games">
+        <img src="../features/assets/buttons/search.png" alt="Search">
+      </button>
+    </div>
+
+    <div class="page-grid" id="pageGrid">
+      <!-- Games will be generated here -->
+    </div>
+  </div>
+
+  <div class="iframe-overlay" id="iframeOverlay" aria-hidden="true">
+    <div class="iframe-panel">
+      <div class="iframe-toolbar">
+        <div class="frame-title" id="frameTitle">Preview</div>
+        <button class="iframe-close-button" id="closeOverlay"><img src="../features/assets/buttons/close.png" alt="Close"></button>
+      </div>
+      <iframe id="previewFrame" src="" title="Game preview"></iframe>
+      <div class="iframe-bottom-actions">
+        <button type="button" id="refreshButton"><img src="../features/assets/buttons/refresh.png" alt="Refresh">Refresh</button>
+        <button type="button" id="openNewButton"><img src="../features/assets/buttons/plus.png" alt="Open in new tab">New Tab</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const overlay = document.getElementById('iframeOverlay');
+    const frame = document.getElementById('previewFrame');
+    const titleEl = document.getElementById('frameTitle');
+    let currentUrl = '';
+
+    const coverURL = "https://cdn.jsdelivr.net/gh/freebuisness/covers@main";
+    const htmlURL = "https://cdn.jsdelivr.net/gh/freebuisness/html@main";
+    const dataURL = "https://cdn.jsdelivr.net/gh/freebuisness/assets@main/zones.json";
+
+    const pageGrid = document.getElementById('pageGrid');
+    const searchInput = document.getElementById('gameSearch');
+    const searchButton = document.getElementById('searchButton');
+
+    function updateSearchFilter() {
+      const query = searchInput.value.trim().toLowerCase();
+      pageGrid.querySelectorAll('.page-box').forEach(box => {
+        const name = box.dataset.name.toLowerCase();
+        box.style.display = name.includes(query) ? '' : 'none';
+      });
+    }
+
+    searchInput.addEventListener('input', updateSearchFilter);
+    searchButton.addEventListener('click', updateSearchFilter);
+    searchInput.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        updateSearchFilter();
+      }
+    });
+
+    async function loadGames() {
+      try {
+        const response = await fetch(`${dataURL}?t=${Date.now()}`);
+        const zones = await response.json();
+        const games = zones.filter(zone => zone.id !== -1);
+        pageGrid.innerHTML = '';
+
+        games.forEach(zone => {
+          const pageUrl = zone.url.startsWith('http') ? zone.url : zone.url.replace('{HTML_URL}', htmlURL);
+          const button = document.createElement('button');
+          button.className = 'page-box';
+          button.setAttribute('data-url', pageUrl);
+          button.setAttribute('data-name', zone.name);
+          button.setAttribute('aria-label', `Open ${zone.name}`);
+          button.type = 'button';
+
+          const img = document.createElement('img');
+          img.className = 'box-image';
+          img.dataset.src = zone.cover.replace('{COVER_URL}', coverURL);
+          img.alt = `${zone.name} image preview`;
+          img.loading = 'lazy';
+          img.classList.add('lazy-game-image');
+          img.onerror = () => {
+            img.style.display = 'none';
+            const text = document.createElement('div');
+            text.textContent = zone.name;
+            text.style.fontSize = '14px';
+            text.style.textAlign = 'center';
+            text.style.padding = '10px';
+            button.appendChild(text);
+          };
+
+          button.appendChild(img);
+          pageGrid.appendChild(button);
+        });
+
+        const lazyImages = document.querySelectorAll('img.lazy-game-image');
+        const observer = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const img = entry.target;
+              img.src = img.dataset.src;
+              img.classList.remove('lazy-game-image');
+              observer.unobserve(img);
+            }
+          });
+        }, {
+          rootMargin: '100px',
+          threshold: 0.1
+        });
+        lazyImages.forEach(img => observer.observe(img));
+      } catch (error) {
+        pageGrid.innerHTML = '<p>Failed to load game images. Refresh the page.</p>';
+        console.error(error);
+      }
+    }
+
+    loadGames();
+
+    async function openOverlay(url, title) {
+      currentUrl = url;
+      titleEl.textContent = title || url.split('/').pop().replace('.html', '');
+      overlay.classList.add('active');
+      overlay.setAttribute('aria-hidden', 'false');
+
+      if (url.startsWith('http')) {
+        try {
+          const response = await fetch(url + '?t=' + Date.now());
+          const html = await response.text();
+          frame.srcdoc = html;
+        } catch (error) {
+          console.error('Remote page load failed, falling back to src:', error);
+          frame.srcdoc = '';
+          frame.src = url;
+        }
+      } else {
+        frame.srcdoc = '';
+        frame.src = url;
+      }
+    }
+
+    document.addEventListener('click', (e) => {
+      const box = e.target.closest('.page-box');
+      if (box) {
+        openOverlay(box.dataset.url, box.dataset.name);
+      }
+    });
+
+    function closeFrame() {
+      overlay.classList.remove('active');
+      overlay.setAttribute('aria-hidden', 'true');
+      frame.src = '';
+    }
+
+    document.getElementById('refreshButton').addEventListener('click', () => {
+      if (currentUrl) openOverlay(currentUrl, titleEl.textContent);
+    });
+
+    document.getElementById('openNewButton').addEventListener('click', async () => {
+      if (!currentUrl) return;
+      if (currentUrl.startsWith('http')) {
+        try {
+          const response = await fetch(currentUrl + '?t=' + Date.now());
+          const html = await response.text();
+          const newWin = window.open();
+          if (newWin) {
+            newWin.document.open();
+            newWin.document.write(html);
+            newWin.document.close();
+          }
+          return;
+        } catch (error) {
+          console.error('New tab render failed, opening URL directly:', error);
+        }
+      }
+      window.open(encodeURI(currentUrl), '_blank');
+    });
+    const closeButton = document.getElementById('closeOverlay');
+    closeButton.addEventListener('click', closeFrame);
+    overlay.addEventListener('click', event => {
+      if (event.target === overlay) closeFrame();
+    });
+  </script>
+</body>
+</html>
