@@ -1928,6 +1928,9 @@
         <button class="sidebar-btn" data-tab="settings">
           <span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M12.22 2h-.44a2 2 0 00-2 2v.18a2 2 0 01-1 1.73l-.43.25a2 2 0 01-2 0l-.15-.08a2 2 0 00-2.73.73l-.22.38a2 2 0 00.73 2.73l.15.1a2 2 0 011 1.72v.51a2 2 0 01-1 1.74l-.15.09a2 2 0 00-.73 2.73l.22.38a2 2 0 002.73.73l.15-.08a2 2 0 012 0l.43.25a2 2 0 011 1.73V20a2 2 0 002 2h.44a2 2 0 002-2v-.18a2 2 0 011-1.73l.43-.25a2 2 0 012 0l.15.08a2 2 0 002.73-.73l.22-.39a2 2 0 00-.73-2.73l-.15-.08a2 2 0 01-1-1.74v-.5a2 2 0 011-1.74l.15-.09a2 2 0 00.73-2.73l-.22-.38a2 2 0 00-2.73-.73l-.15.08a2 2 0 01-2 0l-.43-.25a2 2 0 01-1-1.73V4a2 2 0 00-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg></span><span class="sidebar-label">Settings</span>
         </button>
+        <button class="sidebar-btn" data-tab="chat" title="Chat" aria-label="Chat">
+          <span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5 8.4 8.4 0 0 1-4-.99L3 21l1.99-5.5A8.4 8.4 0 0 1 4 11.5 8.5 8.5 0 0 1 12.5 3h.5a8.5 8.5 0 0 1 8 8v.5Z"></path></svg></span><span class="sidebar-label">Chat</span>
+        </button>
         <button class="sidebar-btn" data-tab="console">
           <span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg></span><span class="sidebar-label">Console</span>
         </button>
@@ -1963,6 +1966,47 @@
         </div>
         <div class="social-links">
           <a href="https://discord.gg/GfXhwvEvw8" target="_blank" class="social-btn"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z" fill="currentColor" stroke="none"></path></svg><span class="social-label">Discord</span></a>
+        </div>
+      </div>
+
+      <div class="tab-content" id="chat">
+        <header class="chat-page-header">
+          <div><h2>Community Chat</h2><p>Live conversation</p></div>
+          <span id="chat-connection-state" role="status">Connecting...</span>
+        </header>
+        <div class="chat-layout">
+          <aside class="chat-profile-panel" aria-label="Chat profile">
+            <div class="chat-profile-preview">
+              <img id="chat-profile-avatar" alt="Your profile picture" hidden>
+              <span id="chat-profile-initials" aria-hidden="true">G</span>
+            </div>
+            <label for="chat-nickname">Nickname</label>
+            <input id="chat-nickname" maxlength="24" autocomplete="nickname" placeholder="Guest">
+            <label for="chat-avatar-url">Profile picture URL</label>
+            <input id="chat-avatar-url" type="url" placeholder="https://..." inputmode="url">
+            <input id="chat-avatar-file" type="file" accept="image/png,image/jpeg,image/webp,image/gif" hidden>
+            <label class="chat-secondary-button" for="chat-avatar-file">Upload profile picture</label>
+            <button class="chat-primary-button" id="chat-profile-save" type="button">Save profile</button>
+            <p id="chat-profile-status" class="chat-helper" role="status">Your nickname is shown with your messages.</p>
+          </aside>
+          <section class="chat-room" aria-label="Live messages">
+            <div id="chat-messages" class="chat-messages" role="log" aria-live="polite" aria-relevant="additions text">
+              <p class="chat-empty">Connecting to chat...</p>
+            </div>
+            <div id="chat-image-preview" class="chat-image-preview" hidden>
+              <img id="chat-image-preview-img" alt="Image selected for message">
+              <button id="chat-image-remove" type="button" aria-label="Remove attached image">Remove image</button>
+            </div>
+            <form id="chat-compose" class="chat-compose">
+              <input id="chat-image-file" type="file" accept="image/png,image/jpeg,image/webp,image/gif" hidden>
+              <label class="chat-attach-button" for="chat-image-file" title="Attach an image" aria-label="Attach an image">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="m21 15-5-5L5 21"></path></svg>
+              </label>
+              <textarea id="chat-message-input" maxlength="500" rows="1" placeholder="Write a message..." aria-label="Write a message"></textarea>
+              <button class="chat-primary-button" id="chat-send" type="submit">Send</button>
+            </form>
+            <p id="chat-compose-status" class="chat-compose-status" role="status"></p>
+          </section>
         </div>
       </div>
 
@@ -4014,7 +4058,7 @@
   </div>
 
   <!-- ─── FIRST-TIME SETUP WIZARD ─── -->
-  <div id="setup-wizard" class="loading-cursor" style="display: flex;">
+  <div id="setup-wizard" class="loading-cursor" style="display: none;">
     <div class="setup-card">
       <div class="setup-header">
         <div class="setup-logo">◆</div>
@@ -9774,6 +9818,73 @@ let DATA = {
   html.chromebook-lite #topography-canvas, html.chromebook-lite #matrix-canvas,
   html.chromebook-lite #noise-bg, html.chromebook-lite #ember-bg,
   html.chromebook-lite #particles-bg, html.chromebook-lite #custom-bg { display: none !important; }
+  .chat-page-header {
+    max-width: 1160px; margin: 0 auto 14px; display: flex; align-items: end; justify-content: space-between; gap: 12px;
+  }
+  .chat-page-header h2 { margin: 0 0 4px; font-size: 28px; text-align: left; animation: none; }
+  .chat-page-header p { margin: 0; color: #f9df7b; font-size: 13px; text-align: left; }
+  #chat-connection-state { color: #bfe7c3; font-size: 12px; white-space: nowrap; }
+  .chat-layout {
+    max-width: 1160px; height: min(72vh, 720px); min-height: 440px; margin: 0 auto;
+    display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 12px;
+  }
+  .chat-profile-panel, .chat-room {
+    min-width: 0; border: 1px solid rgba(255,220,105,0.32); border-radius: 12px;
+    background: rgba(42,34,12,0.58); box-shadow: inset 0 1px rgba(255,255,255,0.12);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  }
+  .chat-profile-panel { display: flex; flex-direction: column; align-items: stretch; gap: 9px; padding: 16px; }
+  .chat-profile-preview {
+    align-self: center; width: 76px; height: 76px; display: grid; place-items: center; overflow: hidden;
+    margin: 2px 0 8px; border: 2px solid rgba(255,220,105,0.55); border-radius: 50%;
+    background: rgba(255,226,122,0.12); color: #ffe27a; font-size: 24px;
+  }
+  .chat-profile-preview img { width: 100%; height: 100%; object-fit: cover; }
+  .chat-profile-panel > label:not(.chat-secondary-button) { color: #f9df7b; font-size: 12px; }
+  .chat-profile-panel input:not([type="file"]) {
+    box-sizing: border-box; width: 100%; min-height: 38px; padding: 8px 10px; color: #fff8d9;
+    border: 1px solid rgba(255,220,105,0.34); border-radius: 8px; background: rgba(0,0,0,0.24); font: inherit;
+  }
+  .chat-primary-button, .chat-secondary-button, .chat-attach-button {
+    display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 38px;
+    padding: 8px 12px; border: 1px solid rgba(255,220,105,0.42); border-radius: 8px;
+    background: rgba(255,216,77,0.12); color: #fff1a8; font-family: inherit; font-size: 12px; font-weight: 600; cursor: pointer;
+  }
+  .chat-primary-button { background: linear-gradient(145deg,#ffe27a,#f0ad00); color: #302300; border-color: #e9a900; }
+  .chat-primary-button:hover, .chat-secondary-button:hover, .chat-attach-button:hover { filter: brightness(1.08); }
+  .chat-helper, .chat-compose-status { margin: 0; color: rgba(255,241,168,0.7); font-size: 11px; line-height: 1.45; }
+  .chat-room { display: flex; flex-direction: column; overflow: hidden; padding: 10px; }
+  .chat-messages { flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; padding: 6px; }
+  .chat-empty { margin: auto; color: rgba(255,241,168,0.65); font-size: 13px; text-align: center; }
+  .chat-message { display: grid; grid-template-columns: 36px minmax(0,1fr); gap: 9px; align-items: start; }
+  .chat-message-avatar { width: 36px; height: 36px; display: grid; place-items: center; overflow: hidden; border-radius: 50%; background: rgba(255,216,77,0.16); color: #ffe27a; font-size: 13px; }
+  .chat-message-avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .chat-message-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 4px; }
+  .chat-message-name { color: #ffe27a; font-size: 12px; font-weight: 700; }
+  .chat-message-time { color: rgba(255,241,168,0.5); font-size: 10px; }
+  .chat-message-text { color: #fff8d9; font-size: 13px; line-height: 1.45; overflow-wrap: anywhere; white-space: pre-wrap; }
+  .chat-message-image { display: block; max-width: min(100%, 360px); max-height: 280px; margin-top: 7px; border-radius: 8px; object-fit: contain; }
+  .chat-message-reactions { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 7px; }
+  .chat-reaction { min-height: 27px; padding: 3px 8px; border: 1px solid rgba(255,220,105,0.24); border-radius: 999px; background: rgba(255,255,255,0.04); color: #fff1a8; font-size: 11px; cursor: pointer; }
+  .chat-reaction[aria-pressed="true"] { border-color: rgba(255,220,105,0.7); background: rgba(255,216,77,0.18); }
+  .chat-image-preview { position: relative; align-self: flex-start; margin: 5px 8px; }
+  .chat-image-preview img { max-width: 180px; max-height: 120px; border-radius: 8px; object-fit: cover; }
+  .chat-image-preview button { display: block; border: 0; background: none; color: #ffe27a; font-size: 11px; cursor: pointer; }
+  .chat-compose { display: grid; grid-template-columns: 40px minmax(0,1fr) auto; gap: 8px; align-items: end; padding: 8px 4px 2px; border-top: 1px solid rgba(255,220,105,0.18); }
+  .chat-attach-button { width: 40px; height: 40px; box-sizing: border-box; padding: 0; }
+  #chat-message-input { width: 100%; min-height: 40px; max-height: 120px; box-sizing: border-box; resize: vertical; padding: 10px;
+    border: 1px solid rgba(255,220,105,0.3); border-radius: 8px; background: rgba(0,0,0,0.24); color: #fff8d9; font-family: inherit; font-size: 13px; }
+  .chat-compose-status { min-height: 16px; padding: 3px 5px 0; }
+  @media (max-width: 700px) {
+    .chat-page-header h2 { font-size: 24px; }
+    .chat-layout { height: auto; min-height: 0; grid-template-columns: minmax(0,1fr); }
+    .chat-profile-panel { display: grid; grid-template-columns: 52px minmax(0,1fr); align-items: center; gap: 7px 10px; padding: 10px; }
+    .chat-profile-preview { grid-row: span 3; width: 48px; height: 48px; margin: 0; font-size: 17px; }
+    .chat-profile-panel > label:not(.chat-secondary-button) { display: none; }
+    .chat-profile-panel input:not([type="file"]), .chat-secondary-button, .chat-primary-button { min-width: 0; }
+    .chat-helper { grid-column: 1 / -1; }
+    .chat-room { height: min(58vh, 560px); min-height: 300px; }
+  }
   #owner-login {
     position: fixed; inset: 0; z-index: 30000; display: none; align-items: center; justify-content: center;
     padding: 16px; background: rgba(5,8,8,0.58); backdrop-filter: blur(12px);
@@ -10032,7 +10143,8 @@ let DATA = {
 </div>
 <script type="module">
   import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
-  import { getDatabase, onDisconnect, onValue, push, ref, serverTimestamp, set } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js';
+  import { getDatabase, limitToLast, onDisconnect, onValue, push, query, ref, runTransaction, serverTimestamp, set } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js';
+  import { getDownloadURL, getStorage, ref as storageRef, uploadBytes } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-storage.js';
 
   const firebaseConfig = {
     apiKey: 'AIzaSyAVDmlbYJd0OIIKCw8VfFFmUwz4uuMPij8',
@@ -10054,6 +10166,30 @@ let DATA = {
   const ownerFeedback = document.getElementById('owner-feedback');
   const announcementBanner = document.getElementById('global-announcement');
   const sharedAudioCheckbox = document.getElementById('shared-audio-enabled-check');
+  const chatConnectionState = document.getElementById('chat-connection-state');
+  const chatMessagesElement = document.getElementById('chat-messages');
+  const chatNicknameInput = document.getElementById('chat-nickname');
+  const chatAvatarUrlInput = document.getElementById('chat-avatar-url');
+  const chatAvatarImage = document.getElementById('chat-profile-avatar');
+  const chatAvatarInitials = document.getElementById('chat-profile-initials');
+  const chatProfileStatus = document.getElementById('chat-profile-status');
+  const chatMessageInput = document.getElementById('chat-message-input');
+  const chatComposeStatus = document.getElementById('chat-compose-status');
+  const chatForm = document.getElementById('chat-compose');
+  const chatImageInput = document.getElementById('chat-image-file');
+  const chatAvatarFileInput = document.getElementById('chat-avatar-file');
+  const chatImagePreview = document.getElementById('chat-image-preview');
+  const chatImagePreviewImg = document.getElementById('chat-image-preview-img');
+  const allowedImageTypes = new Set(['image/png', 'image/jpeg', 'image/webp', 'image/gif']);
+  const chatSessionId = (() => {
+    let sessionId = localStorage.getItem('chatSessionId');
+    if (!sessionId) {
+      sessionId = typeof crypto.randomUUID === 'function' ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+      localStorage.setItem('chatSessionId', sessionId);
+    }
+    return sessionId;
+  })();
+  let pendingChatImage = null;
   const OWNER_PASSWORD = 'tokoolkoala';
   const soundDirectoryApi = 'https://api.github.com/repos/arcady-web/arcady-web.github.io/contents/features/music?ref=main';
   const globalSoundUrls = new Map([
@@ -10118,6 +10254,45 @@ let DATA = {
     return soundLibraryLoadPromise;
   };
 
+  const safeChatImageUrl = (value) => {
+    try {
+      const url = new URL(String(value || '').trim());
+      return url.protocol === 'https:' ? url.href : '';
+    } catch (error) {
+      return '';
+    }
+  };
+  const chatProfile = () => ({
+    nickname: chatNicknameInput.value.replace(/\s+/g, ' ').trim().slice(0, 24) || 'Guest',
+    avatarUrl: safeChatImageUrl(chatAvatarUrlInput.value)
+  });
+  const updateChatAvatarPreview = () => {
+    const profile = chatProfile();
+    chatAvatarInitials.textContent = Array.from(profile.nickname)[0]?.toUpperCase() || 'G';
+    if (profile.avatarUrl) {
+      chatAvatarImage.src = profile.avatarUrl;
+      chatAvatarImage.hidden = false;
+      chatAvatarInitials.hidden = true;
+    } else {
+      chatAvatarImage.removeAttribute('src');
+      chatAvatarImage.hidden = true;
+      chatAvatarInitials.hidden = false;
+    }
+  };
+  chatNicknameInput.value = localStorage.getItem('chatNickname') || '';
+  chatAvatarUrlInput.value = localStorage.getItem('chatAvatarUrl') || '';
+  updateChatAvatarPreview();
+  chatNicknameInput.addEventListener('input', updateChatAvatarPreview);
+  chatAvatarUrlInput.addEventListener('input', updateChatAvatarPreview);
+  document.getElementById('chat-profile-save').addEventListener('click', () => {
+    const profile = chatProfile();
+    chatNicknameInput.value = profile.nickname === 'Guest' ? '' : profile.nickname;
+    chatAvatarUrlInput.value = profile.avatarUrl;
+    localStorage.setItem('chatNickname', profile.nickname === 'Guest' ? '' : profile.nickname);
+    localStorage.setItem('chatAvatarUrl', profile.avatarUrl);
+    updateChatAvatarPreview();
+    chatProfileStatus.textContent = `Profile saved as ${profile.nickname}.`;
+  });
   const setOwnerFeedback = (message) => { ownerFeedback.textContent = message; };
   const closeOwnerPanel = () => {
     ownerPanel.classList.remove('open');
@@ -10203,11 +10378,205 @@ let DATA = {
   try {
     const app = initializeApp(firebaseConfig);
     const database = getDatabase(app, firebaseConfig.databaseURL);
+    const storage = getStorage(app);
     const connectionsRef = ref(database, 'presence');
     const connectionRef = push(connectionsRef);
     const backgroundRef = ref(database, 'globalControls/background');
     const announcementRef = ref(database, 'globalControls/announcement');
     const soundRef = ref(database, 'globalControls/sound');
+    const chatMessagesRef = ref(database, 'chatMessages');
+    const chatHistoryQuery = query(chatMessagesRef, limitToLast(100));
+    const reactionOptions = [
+      { key: 'like', emoji: '👍' }, { key: 'love', emoji: '❤️' },
+      { key: 'laugh', emoji: '😂' }, { key: 'wow', emoji: '😮' }
+    ];
+
+    const uploadChatImage = async (file, folder, maxBytes) => {
+      if (!allowedImageTypes.has(file.type)) throw new Error('Choose a PNG, JPEG, WebP, or GIF image.');
+      if (file.size > maxBytes) throw new Error(`Image must be smaller than ${Math.floor(maxBytes / (1024 * 1024))} MB.`);
+      const extensions = { 'image/png': 'png', 'image/jpeg': 'jpg', 'image/webp': 'webp', 'image/gif': 'gif' };
+      const randomPart = typeof crypto.randomUUID === 'function' ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+      const fileRef = storageRef(storage, `community-chat/${folder}/${chatSessionId}/${randomPart}.${extensions[file.type]}`);
+      const upload = await uploadBytes(fileRef, file, { contentType: file.type });
+      return getDownloadURL(upload.ref);
+    };
+
+    const renderChatMessages = (snapshot) => {
+      const shouldStickToBottom = chatMessagesElement.scrollHeight - chatMessagesElement.scrollTop - chatMessagesElement.clientHeight < 80;
+      chatMessagesElement.replaceChildren();
+      if (!snapshot.exists()) {
+        const empty = document.createElement('p');
+        empty.className = 'chat-empty';
+        empty.textContent = 'No messages yet. Start the conversation.';
+        chatMessagesElement.appendChild(empty);
+        return;
+      }
+
+      snapshot.forEach((child) => {
+        const messageId = child.key;
+        const message = child.val() || {};
+        const nickname = String(message.nickname || 'Guest').slice(0, 24);
+        const article = document.createElement('article');
+        article.className = 'chat-message';
+        article.dataset.chatMessage = messageId;
+
+        const avatar = document.createElement('div');
+        avatar.className = 'chat-message-avatar';
+        const initials = document.createElement('span');
+        initials.textContent = Array.from(nickname)[0]?.toUpperCase() || 'G';
+        avatar.appendChild(initials);
+        const avatarUrl = safeChatImageUrl(message.avatarUrl);
+        if (avatarUrl) {
+          const image = document.createElement('img');
+          image.src = avatarUrl;
+          image.alt = '';
+          image.loading = 'lazy';
+          image.onerror = () => image.remove();
+          avatar.appendChild(image);
+        }
+
+        const body = document.createElement('div');
+        const head = document.createElement('div');
+        head.className = 'chat-message-head';
+        const name = document.createElement('span');
+        name.className = 'chat-message-name';
+        name.textContent = nickname;
+        const time = document.createElement('time');
+        time.className = 'chat-message-time';
+        const createdAt = Number(message.createdAt);
+        if (Number.isFinite(createdAt) && createdAt > 0) {
+          time.dateTime = new Date(createdAt).toISOString();
+          time.textContent = new Date(createdAt).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+        }
+        head.append(name, time);
+        body.appendChild(head);
+
+        if (message.text) {
+          const text = document.createElement('div');
+          text.className = 'chat-message-text';
+          text.textContent = String(message.text).slice(0, 500);
+          body.appendChild(text);
+        }
+        const imageUrl = safeChatImageUrl(message.imageUrl);
+        if (imageUrl) {
+          const image = document.createElement('img');
+          image.className = 'chat-message-image';
+          image.src = imageUrl;
+          image.alt = `Image shared by ${nickname}`;
+          image.loading = 'lazy';
+          image.onerror = () => image.remove();
+          body.appendChild(image);
+        }
+
+        const reactions = document.createElement('div');
+        reactions.className = 'chat-message-reactions';
+        reactionOptions.forEach(({ key, emoji }) => {
+          const users = message.reactions?.[key] || {};
+          const count = Object.values(users).filter(Boolean).length;
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'chat-reaction';
+          button.dataset.chatReaction = key;
+          button.setAttribute('aria-pressed', String(!!users[chatSessionId]));
+          button.setAttribute('aria-label', `${emoji} ${count} reactions`);
+          button.textContent = `${emoji} ${count || ''}`.trim();
+          reactions.appendChild(button);
+        });
+        body.appendChild(reactions);
+        article.append(avatar, body);
+        chatMessagesElement.appendChild(article);
+      });
+      if (shouldStickToBottom) chatMessagesElement.scrollTop = chatMessagesElement.scrollHeight;
+    };
+
+    onValue(chatHistoryQuery, renderChatMessages, () => {
+      chatConnectionState.textContent = 'Chat unavailable';
+      chatComposeStatus.textContent = 'Could not connect to chat. Check Firebase Realtime Database rules.';
+    });
+    chatConnectionState.textContent = 'Live';
+
+    chatMessagesElement.addEventListener('click', async (event) => {
+      const button = event.target.closest('[data-chat-reaction]');
+      if (!button) return;
+      const messageId = button.closest('[data-chat-message]')?.dataset.chatMessage;
+      const reaction = button.dataset.chatReaction;
+      if (!messageId || !reaction) return;
+      try {
+        await runTransaction(ref(database, `chatMessages/${messageId}/reactions/${reaction}/${chatSessionId}`), (current) => current ? null : true);
+      } catch (error) {
+        chatComposeStatus.textContent = 'Could not save reaction. Check chat permissions.';
+      }
+    });
+
+    const clearPendingChatImage = () => {
+      const previewUrl = chatImagePreviewImg.src;
+      if (previewUrl.startsWith('blob:')) URL.revokeObjectURL(previewUrl);
+      chatImagePreviewImg.removeAttribute('src');
+      chatImagePreview.hidden = true;
+      chatImageInput.value = '';
+      pendingChatImage = null;
+    };
+    chatImageInput.addEventListener('change', () => {
+      const file = chatImageInput.files?.[0];
+      if (!file) return;
+      if (!allowedImageTypes.has(file.type) || file.size > 4 * 1024 * 1024) {
+        clearPendingChatImage();
+        chatComposeStatus.textContent = 'Choose a PNG, JPEG, WebP, or GIF smaller than 4 MB.';
+        return;
+      }
+      clearPendingChatImage();
+      pendingChatImage = file;
+      chatImagePreviewImg.src = URL.createObjectURL(file);
+      chatImagePreview.hidden = false;
+      chatComposeStatus.textContent = 'Image ready to send.';
+    });
+    document.getElementById('chat-image-remove').addEventListener('click', clearPendingChatImage);
+
+    chatAvatarFileInput.addEventListener('change', async () => {
+      const file = chatAvatarFileInput.files?.[0];
+      if (!file) return;
+      try {
+        chatProfileStatus.textContent = 'Uploading profile picture...';
+        const avatarUrl = await uploadChatImage(file, 'avatars', 2 * 1024 * 1024);
+        chatAvatarUrlInput.value = avatarUrl;
+        document.getElementById('chat-profile-save').click();
+        chatProfileStatus.textContent = 'Profile picture uploaded.';
+      } catch (error) {
+        chatProfileStatus.textContent = error.message || 'Upload failed. Check Firebase Storage rules.';
+      } finally {
+        chatAvatarFileInput.value = '';
+      }
+    });
+
+    chatForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const text = chatMessageInput.value.trim().slice(0, 500);
+      const imageFile = pendingChatImage;
+      if (!text && !imageFile) return;
+      const sendButton = document.getElementById('chat-send');
+      sendButton.disabled = true;
+      chatComposeStatus.textContent = imageFile ? 'Uploading image...' : 'Sending...';
+      try {
+        const profile = chatProfile();
+        let imageUrl = '';
+        if (imageFile) imageUrl = await uploadChatImage(imageFile, 'messages', 4 * 1024 * 1024);
+        const messageRef = push(chatMessagesRef);
+        await set(messageRef, {
+          nickname: profile.nickname,
+          avatarUrl: profile.avatarUrl,
+          text,
+          imageUrl,
+          createdAt: Date.now()
+        });
+        chatMessageInput.value = '';
+        clearPendingChatImage();
+        chatComposeStatus.textContent = 'Message sent.';
+      } catch (error) {
+        chatComposeStatus.textContent = 'Could not send. Check Firebase Database and Storage rules.';
+      } finally {
+        sendButton.disabled = false;
+      }
+    });
 
     onValue(backgroundRef, (snapshot) => {
       const mode = snapshot.val()?.mode;
